@@ -1,0 +1,42 @@
+<html>
+<head>
+
+<script src='../common/tools/jquery/3.2.1/jquery-3.2.1.js'></script>
+<script src="../common/tools/qs/6.5.2/qs.js?v=1.1"></script>
+</head>
+<body>
+<input type="text" id="title" name="title" value="" />
+<button type="button" onclick="show()">显示</button>
+<script type="text/javascript">
+function show(){
+var condition=["title"]
+var baseData=getBaseData(condition);
+var qsd=Qs.stringify(baseData);
+console.log(baseData);
+console.log(qsd);
+}
+function getBaseData(condition){
+	//var conditionIsArray = isArrayFn(condition);
+	var baseData=[];
+	var row={};
+	//if(conditionIsArray){
+		for(var i=0, len = condition.length;i<len;i++ ){
+			var conditionId = condition[i];
+			if(conditionId){
+				var conditionInput = $("#"+conditionId);
+				if(conditionInput.length>0){
+					var name=conditionInput.attr("name");
+					var value=conditionInput.val();
+					row.name=name;
+					row.value=value;
+					baseData.push(row);
+				}
+			}
+		}
+		return baseData;
+	//}
+	//return baseData;
+}
+</script>
+</body>
+</html>

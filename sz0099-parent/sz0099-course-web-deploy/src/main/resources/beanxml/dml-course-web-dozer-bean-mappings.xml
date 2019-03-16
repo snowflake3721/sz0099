@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://dozer.sourceforge.net
+          http://dozer.sourceforge.net/schema/beanmapping.xsd">
+
+  <mapping>
+  	<class-a>org.jit4j.app.persist.entity.auth.Module</class-a>
+  	<class-b>org.jit4j.app.persist.entity.auth.bo.ModuleBo</class-b>
+  </mapping>
+  
+  <mapping>
+  	<class-a>org.jit4j.core.web.mvc.controller.config.RequestInfoItem</class-a>
+  	<class-b>org.jit4j.app.persist.entity.auth.Resource</class-b>
+  	<field>
+  		<a>controllerName</a>
+  		<b>classFullName</b>
+  	</field>
+  	<field>
+  		<a>controllerSimpleName</a>
+  		<b>classSimpleName</b>
+  	</field>
+  	<field>
+  		<a>requestUrl</a>
+  		<b>url</b>
+  	</field>
+  	<field>
+  		<a>requestMappingName</a>
+  		<b>requestMappingName</b>
+  	</field>
+  </mapping>
+            
+</mappings>  

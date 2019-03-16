@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>dml.sz0099.course</groupId>
+		<artifactId>sz0099-course-parent</artifactId>
+		<version>1.0.0.0-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>sz0099-course-web-deploy</artifactId>
+	<name>sz0099-course-web-deploy</name>
+	<packaging>war</packaging>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+	</properties>
+	<dependencies>
+
+		<dependency>
+			<groupId>dml.sz0099.course</groupId>
+			<artifactId>sz0099-course-web-wrapper</artifactId>
+			<version>${sz0099.course.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.jit8j.core</groupId>
+			<artifactId>jit8j-web-integrate</artifactId>
+			<version>${jit8j.version}</version>
+		</dependency>
+
+	</dependencies>
+	<build>
+		<finalName>course-deploy</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+			</plugin>
+			
+		</plugins>
+	</build>
+</project>

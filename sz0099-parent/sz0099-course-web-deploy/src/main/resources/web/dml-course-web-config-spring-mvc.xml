@@ -1,0 +1,405 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                        http://www.springframework.org/schema/beans/spring-beans-4.0.xsd    
+                        http://www.springframework.org/schema/context    
+                        http://www.springframework.org/schema/context/spring-context-4.0.xsd    
+                        http://www.springframework.org/schema/mvc    
+                        http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+                        http://www.springframework.org/schema/util 
+						http://www.springframework.org/schema/util/spring-util.xsd
+						http://www.springframework.org/schema/aop
+         				http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+">
+	<!-- 配置跨域
+	<mvc:cors></mvc:cors>
+	 -->
+    <!-- 自动扫描该包，使SpringMVC认为包下用了@controller注解的类是控制器 -->
+    <context:component-scan base-package="org.jit4j.core.utils.component"/>
+    <context:component-scan base-package="org.jit4j.core.i18n.resource"/>
+    <context:component-scan base-package="org.jit4j.core.webmvc"/>
+    <context:component-scan base-package="org.jit4j.core.shiro"/>
+    
+    <context:component-scan base-package="org.jit4j.app.client.controller.qr"/>
+    <context:component-scan base-package="org.jit4j.app.client.controller.auth"/>
+    <context:component-scan base-package="org.jit4j.app.client.controller.shiro"/>
+    <context:component-scan base-package="org.jit4j.app.client.controller.statistics"/>
+    
+    <context:component-scan base-package="dml.**.webmvc.**"/>
+    <context:component-scan base-package="dml.**.webmvc"/>
+    
+	
+	<bean id="resourcePathConfig" class="org.jit4j.core.webmvc.config.DefaultResourcePathConfig">
+		<property name="packageModelStyleDynamic" value="default"></property>
+	</bean>
+	
+    <!-- 配置文件上传，如果没有使用文件上传可以不用配置，当然如果不配，那么配置文件中也不必引入上传组件包 -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- 默认编码 -->
+        <property name="defaultEncoding" value="utf-8"/>
+        <!-- 文件大小最大值 -->
+        <property name="maxUploadSize" value="10485760000"/>
+        <!-- 内存中的最大值 -->
+        <property name="maxInMemorySize" value="40960"/>
+    </bean>
+    <bean class="org.jit4j.core.webmvc.util.MobileUtils" id="mobileSessionUtils">
+    	<property name="expire" value="600"></property>
+    	<property name="redisManager" ref="redisManager"></property>
+    </bean>
+
+    <!-- spring thread pool executor -->
+    <bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+        <!-- 线程池维护线程的最少数量 -->
+        <property name="corePoolSize" value="0" />
+        <!-- 允许的空闲时间 -->
+        <property name="keepAliveSeconds" value="200" />
+        <!-- 线程池维护线程的最大数量 -->
+        <property name="maxPoolSize" value="10" />
+        <!-- 缓存队列 -->
+        <property name="queueCapacity" value="20" />
+        <!-- 对拒绝task的处理策略 -->
+        <property name="rejectedExecutionHandler">
+            <bean class="java.util.concurrent.ThreadPoolExecutor$CallerRunsPolicy" />
+        </property>
+    </bean>
+
+    <!-- 注意：FreeMarker与SpringMVC集成时，其配置一定要放在SpringMVC的配置之前 -->
+	<!-- 否则：在访问"/getUser"时服务器就会报告[HTTP Status 404 - /WEB-INF/jsp/myfree.jsp] -->
+	<bean id="freeMarkerConfigurer" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+		<!-- 指定FreeMarker模板文件目录 -->
+		<property name="templateLoaderPath" value="/WEB-INF/ftls/" />
+		<property name="freemarkerVariables">
+			<map>
+				<entry key="xml_escape" value-ref="fmXmlEscape" />
+				<entry key="cache" value="false" />
+			</map>
+		</property>
+		<property name="freemarkerSettings">
+			<props>
+				<prop key="tag_syntax">auto_detect</prop>
+				<prop key="template_update_delay">0</prop>
+				<prop key="defaultEncoding">UTF-8</prop>
+				<prop key="url_escaping_charset">UTF-8</prop>
+				<prop key="locale">zh_CN</prop>
+				<prop key="boolean_format">true,false</prop>
+				<prop key="datetime_format">yyyy-MM-dd HH:mm:ss</prop>
+				<prop key="date_format">yyyy-MM-dd</prop>
+				<prop key="time_format">HH:mm:ss</prop>
+				<prop key="number_format">0.######</prop>
+				<prop key="whitespace_stripping">true</prop>
+				<prop key="classic_compatible">true</prop>
+			</props>
+		</property>
+	</bean>
+    
+    <bean id="fmXmlEscape" class="freemarker.template.utility.XmlEscape"/>
+    
+    <bean id="beansWrapperBuilder" class="freemarker.ext.beans.BeansWrapperBuilder">
+    	 <constructor-arg type="freemarker.template.Version" ref="freemarkerTemplateVersion"/>
+    	 <property name="useModelCache" value="true"></property>
+    	 <property name="exposeFields" value="true"></property>
+    </bean>
+    <bean id="freemarkerTemplateVersion" class="freemarker.template.Version">
+    	<constructor-arg index="0"  value="2"/>
+    	<constructor-arg index="1"  value="3"/>
+    	<constructor-arg index="2"  value="28"/>
+    </bean>
+    
+    
+    <!-- 添加静态类 -->
+	<bean id="freemarkerStaticModelsProps" class="org.springframework.beans.factory.config.PropertiesFactoryBean"> 
+        <property name="location" value="${webapp.freemarker.location.file}" /> 
+    </bean>
+    <bean id="freemarkerStaticModels" class="org.jit4j.core.webmvc.freemarker.FreemarkerStaticModels" factory-method="getInstance">
+        <property name="staticModels" ref="freemarkerStaticModelsProps"/>
+    </bean>
+
+	<bean id="freeMarkerViewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+		<!-- <property name="prefix" value="/WEB-INF/ftls/" />  -->
+		<property name="suffix" value=".ftl" />
+		<property name="contentType" value="text/html; charset=UTF-8" />
+		<property name="attributesMap" ref="freemarkerStaticModels" />
+		<property name="exposeSpringMacroHelpers" value="true" />
+		<property name="requestContextAttribute" value="request" />
+		<!-- <property name="exposeRequestAttributes" value="true"/> -->
+		<property name="exposeSessionAttributes" value="true" />
+	</bean>
+	
+	<!-- 访问"/getUserName"时服务器发现找不到/WEB-INF/ftl/username.ftl，于是它就到这里来找了，结果自然是找到了 -->
+	<bean id="internalResourceViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/jsps/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<!-- 启动Spring MVC的注解功能，完成请求和注解POJO的映射 --> 
+	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"> </bean>    
+	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter" >  
+		<property name="messageConverters">   
+		         <list>   
+		              <bean class = "org.springframework.http.converter.StringHttpMessageConverter">   
+		                <property name = "defaultCharset" value="UTF-8"> </property>   
+		                <property name = "writeAcceptCharset" value="false"> </property>   
+		                <property name = "supportedMediaTypes">
+		                      <list>
+		                          <value>text/html;charset=UTF-8</value>   
+		                          <value>text/xml;charset=UTF-8</value>   
+		                          <value>application/json;charset=UTF-8</value>   
+		                     </list>   
+		                </property>   
+		             </bean> 
+		             <ref bean="projectingJackson2HttpMessageConverter" />   
+		             <bean class="org.springframework.http.converter.ByteArrayHttpMessageConverter"/>
+		             <bean class="org.springframework.http.converter.xml.SourceHttpMessageConverter"/>
+		             <bean class="org.springframework.http.converter.support.AllEncompassingFormHttpMessageConverter"/>
+		             
+		             <!-- 配置Fastjson支持 -->
+		             <ref bean="fastJsonHttpMessageConverter"/>
+		         </list>   
+		   </property> 
+		   <property name="customArgumentResolvers">
+			    <list>
+			      <bean class="org.jit4j.core.persist.page.data.web.PageableHandlerMethodArgumentResolver" />
+			    </list>
+		  	</property> 
+		  	<property name="webBindingInitializer">
+		    	<!-- Configures Spring MVC DataBinder instances -->
+			    <bean class="org.springframework.web.bind.support.ConfigurableWebBindingInitializer">
+			    	<property name="validator" ref="jit4jValidator" />
+			    	<property name="conversionService" ref="mvcConversionService"/>
+			    </bean>
+		    </property>
+	</bean>  
+	
+	<bean id="fastJsonHttpMessageConverter" class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+          <property name="supportedMediaTypes">
+              <list>
+              	<value>text/html;charset:UTF-8</value>
+                  <value>application/json;charset=UTF-8</value>
+              </list>
+          </property>
+          <property name="features">
+              <list>
+                  <value>QuoteFieldNames</value>
+                  <value>DisableCircularReferenceDetect</value>
+              </list>
+          </property>
+          <property name="filters">
+              <array>
+              <bean class="org.jit4j.core.webmvc.fastjson.filter.IdLong2StringFilter" id="idLong2StringFilter"></bean>
+              </array>
+          </property>
+          
+         <!--  <property name="fastJsonConfig" ref="fastJsonConfig">
+          </property> -->
+      </bean>
+	
+	
+	<!-- Creates the JSR-303 Validator -->
+    <bean id="jit4jValidator" class="org.jit8j.core.spring.validation.beanvalidation.Jit4jOptionalValidatorFactoryBean" />
+	
+	 <!-- 增加json转换器 -->
+	<bean id="projectingJackson2HttpMessageConverter" class="org.springframework.data.web.ProjectingJackson2HttpMessageConverter" >
+		<property name = "supportedMediaTypes">
+              <list>
+                  <value>application/json;charset=UTF-8</value>   
+             </list>   
+        </property>  
+	</bean>
+	
+	<bean id="globalDefaultExceptionHandler" class="org.jit4j.core.webmvc.exception.GlobalDefaultExceptionHandler"></bean>
+	
+	<bean id="handlerExceptionResolver" class="org.jit4j.core.webmvc.exception.AnnotationHandlerMethodExceptionResolver">
+		<property name="defaultErrorView" value="/mobile/template/error/default/error_500_page"/><!-- 错误页面 -->
+		<property name="messageConverters" ref="fastJsonHttpMessageConverter"/> 
+	</bean>
+	<!-- <bean id="exceptionHandlerExceptionResolver" class="org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver"> </bean>-->
+	
+	
+	
+	<!-- <bean id="exceptionHandler" class="org.jit4j.core.webmvc.exception.CustomSimpleMappingExceptionResolver">
+    	<property name="exceptionMappings">
+			<props>
+			
+				 <prop key="org.apache.shiro.authc.CredentialsException">json_result</prop> 
+				<prop key="org.jit4j.core.exception.SystemException">error_500_page</prop>
+				<prop key="org.jit4j.core.exception.ApplicationException">error_500_page</prop>
+				<prop key="org.jit4j.core.exception.BusinessException">error_500_page</prop>
+				 <prop key="java.lang.Exception">error_500_page</prop> 
+	            <prop key="org.springframework.web.multipart.MaxUploadSizeExceededException">error_fileupload</prop>  
+			</props>
+		</property>
+    </bean> -->
+       <!-- 遇到MaxUploadSizeExceededException异常时，自动跳转到/WEB-INF/jsp/error_fileupload.jsp页面 -->  
+	<!-- 该异常是SpringMVC在检查上传的文件信息时抛出来的，而且此时还没有进入到Controller方法中 -->  
+       <!-- SpringMVC在超出上传文件限制时，会抛出org.springframework.web.multipart.MaxUploadSizeExceededException -->  
+	
+	
+	<!-- enable webMVC data begin-->	
+	<bean class="org.springframework.data.web.config.SpringDataWebConfiguration" />
+	
+	<!-- If you're using Spring HATEOAS as well register this one *instead* of the former -->
+	<bean class="org.springframework.data.web.config.HateoasAwareSpringDataWebConfiguration" />
+	
+	<bean id="mvcConversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">
+		 <property name="converters">
+            <set>
+            <ref bean="idString2LongConverter"/>
+            <ref bean="stringToDateConverter"/> 
+            </set>
+        </property>
+	</bean>
+	
+	<bean id="idString2LongConverter" class="org.jit4j.core.webmvc.converter.IdString2LongConverter"></bean>
+	<bean id="stringToDateConverter" class="org.jit4j.core.webmvc.converter.StringToDateConverter"></bean>
+    
+    <!-- 保证实现了Shiro内部lifecycle函数的bean执行 -->  
+    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+    
+    
+    <!-- <import resource="classpath*:web/config-transfer-dozer-web.xml"/>
+    <import resource="classpath*:web/config-i18n.xml"/>  -->
+    
+    <bean id="requestContextCustom" class="org.jit4j.core.webmvc.protocal.http.RequestContext" >
+    	<!-- <property name="appDomain" value="http://www.google.com"></property> -->
+    	<property name="appDomain" value="${jit4j.mvc.web.basic.appDomain}"></property>
+    	<property name="staticDomain" value="${jit4j.mvc.web.basic.staticDomain}"></property>
+    	<property name="imageDomain" value="${jit4j.mvc.web.basic.imageDomain}"></property>
+    	<property name="mobileDomain" value="${jit4j.mvc.web.basic.mobileDomain}"></property>
+    	<property name="basePath" value="${jit4j.mvc.web.basic.basePath}"></property>
+    	<property name="webPath" value="${jit4j.mvc.web.basic.webPath}"></property>
+    	<property name="mobilePath" value="${jit4j.mvc.web.basic.mobilePath}"></property>
+    	<property name="assertPath" value="${jit4j.mvc.web.basic.assertPath}"></property>
+    </bean>
+    
+    <mvc:default-servlet-handler />
+    <mvc:resources mapping="/favicon.ico" location="/favicon.ico" cache-period="31536000"/>
+	<mvc:resources mapping="/jit4j_jui/**" location="/jit4j_jui/" cache-period="31536000"/>
+	<mvc:resources mapping="/jit4j_strap/**" location="/jit4j_jui/strap/" cache-period="31536000"/>
+	<mvc:resources mapping="/style/**" location="/jit4j_jui/" cache-period="31536000"/>
+	
+	<mvc:resources mapping="/static/**" location="/assets/" cache-period="31536000"/>
+	<mvc:resources mapping="/assets/common/css/**" location="/assets/common/css/" cache-period="31536000"/>
+	<mvc:resources mapping="/assets/common/js/**" location="/assets/common/js/" cache-period="31536000"/>
+	<mvc:resources mapping="/assets/common/fonts/**" location="/assets/common/fonts/" cache-period="31536000"/>
+	<mvc:resources mapping="/assets/common/images/**" location="/assets/common/images/" cache-period="31536000"/>
+	<mvc:resources mapping="/assets/common/sounds/**" location="/assets/common/sounds/" cache-period="31536000"/>
+	<mvc:resources mapping="/assets/common/tools/**" location="/assets/common/tools/" cache-period="31536000"/>
+	<mvc:resources mapping="/assets/common/htmls/**" location="/assets/common/htmls/" cache-period="31536000"/>
+	<mvc:resources mapping="/assets/ckeditor/**" location="/assets/common/tools/ckeditor/" cache-period="31536000"/>
+	<mvc:resources mapping="/assets/fileupload/**" location="/assets/common/tools/fileupload/" cache-period="31536000"/>
+
+	<mvc:resources mapping="${file.root.springmvc.resources.mapping}" location="file:${file.root.core.basePath.defaultPath}/" cache-period="31536000"/>  
+	<mvc:resources mapping="${file.upload.springmvc.resources.mapping}" location="file:${file.upload.core.basePath.defaultPath}/" cache-period="31536000"/>  
+	<mvc:resources mapping="${file.generate.springmvc.resources.mapping}" location="file:${file.generate.core.basePath.defaultPath}/" cache-period="31536000"/>  
+	<mvc:resources mapping="${file.avatar.springmvc.resources.mapping}" location="file:${file.avatar.core.basePath.defaultPath}/" cache-period="31536000"/>  
+	
+	<mvc:resources mapping="/assets/default/js/**" location="/assets/default/js/" cache-period="31536000"/>
+	<mvc:resources mapping="/assets/default/css/**" location="/assets/default/css/" cache-period="31536000"/>
+	<mvc:resources mapping="/assets/default/fonts/**" location="/assets/default/fonts/" cache-period="31536000"/>
+	<mvc:resources mapping="/assets/default/images/**" location="/assets/default/images/" cache-period="31536000"/>
+	<mvc:resources mapping="/assets/default/sounds/**" location="/assets/default/sounds/" cache-period="31536000"/>
+	<mvc:resources mapping="/assets/default/tools/**" location="/assets/default/tools/" cache-period="31536000"/>
+	<mvc:resources mapping="/assets/default/htmls/**" location="/assets/default/htmls/" cache-period="31536000"/>
+	
+	<mvc:resources mapping="/assets/data/**" location="/assets/data/" cache-period="31536000"/>
+
+	<mvc:interceptors> 
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<bean class="org.jit4j.core.webmvc.interceptor.BrowserCheckInterceptor" />
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<bean class="org.jit4j.core.webmvc.interceptor.ModelStyleCheckInterceptor" />
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<bean class="org.jit4j.core.webmvc.interceptor.TokenInterceptor" />
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/activity/article/view/single/**" />
+			<ref bean="ipViewInterceptor"/>
+		</mvc:interceptor>
+		
+		<mvc:interceptor>
+			<mvc:mapping path="/activity/article/mutual/thumbsUp/**" />
+			<mvc:mapping path="/activity/article/mutual/thumbsDown/**" />
+			<mvc:mapping path="/activity/article/mutual/reward/**" />
+			<mvc:mapping path="/pay/unifiedorder/**" />
+			<ref bean="domainMutualInterceptor"/>
+		</mvc:interceptor>
+		
+		<mvc:interceptor>
+			<mvc:mapping path="/**"/>
+			<ref bean="developerIdCheckInterceptor"/>
+		</mvc:interceptor>
+		
+		<mvc:interceptor>
+			<mvc:mapping path="/register"/>
+			<ref bean="userRegisterLogInterceptor"/>
+			
+		</mvc:interceptor>
+		<!-- <mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<bean class="org.jit4j.core.web.mvc.controller.interceptor.AuthorizeInterceptor" />
+		</mvc:interceptor>   -->
+	</mvc:interceptors>
+	
+	<bean id="developerIdCheckInterceptor" class="org.jit4j.core.webmvc.interceptor.DeveloperIdCheckInterceptor">
+		<property name="devIdList" value="${webapp.devIdList}">
+		</property>
+	</bean>
+	
+	<bean id="userRegisterLogInterceptor" class="org.jit4j.core.webmvc.interceptor.UserRegisterLogInterceptor">
+			<property name="userAdaptor" ref="userAdaptor"/>
+	</bean>
+	
+	<bean id="ipViewInterceptor" class="org.jit4j.core.webmvc.interceptor.IpViewInterceptor" >
+		<property name="uriViewType">
+			<map>
+				<entry key="/activity/article/view/single/" value="article_single_view">
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<!-- <util:constant id="VIEW_TYPE_ARTICLE_SINGLE" static-field="org.jit4j.app.persist.entity.statistics.DomainView.VIEW_TYPE_ARTICLE_SINGLE"/> -->
+	
+	<bean id="domainMutualInterceptor" class="org.jit4j.core.webmvc.interceptor.DomainMutualInterceptor" >
+		<property name="uriMutualType">
+			<map>
+				<entry key="/sz0099/ood/article/mutual/thumbsUp/" value="article_single_view#thumbsUp" />
+				<entry key="/activity/article/mutual/thumbsUp/" value="article_single_view#thumbsUp" />
+				<entry key="/activity/article/mutual/thumbsDown/" value="article_single_view#thumbsDown" />
+				<entry key="/activity/article/mutual/reward/" value="article_single_view#reward" />
+			</map>
+		</property>
+	</bean>
+	
+	
+	<bean id="fileInfoGenerator" class="org.jit8j.core.util.generator.FileInfoGenerator">
+		<property name="basePath" value="${file.upload.core.basePath}"></property>
+		<property name="defaultPath" value="${file.upload.core.defaultPath.dir}"></property>
+		<property name="accessUrlMapping" value="${file.upload.core.access.url.mapping}"></property>
+		<property name="accessUrlBasePath" value="${file.upload.core.access.url.basePath}"></property>
+	</bean>
+    
+</beans>

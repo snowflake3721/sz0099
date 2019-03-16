@@ -1,0 +1,592 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+         http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+         http://www.springframework.org/schema/context
+         http://www.springframework.org/schema/context/spring-context-4.0.xsd
+         http://www.springframework.org/schema/tx
+         http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+         http://www.springframework.org/schema/aop
+         http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+         http://www.springframework.org/schema/util
+         http://www.springframework.org/schema/util/spring-util.xsd">
+
+    
+    <!-- <context:component-scan base-package="org.jit4j.app.client.wrapper.statistics"/>
+    <context:component-scan base-package="org.jit4j.app.client.validator.statistics"/>
+    
+    <context:component-scan base-package="org.jit4j.app.client.aspect"/>
+     <aop:aspectj-autoproxy/>
+    
+    <context:component-scan base-package="org.jit8j.core.util"/>
+    <context:component-scan base-package="org.jit4j.app.client.data.holder"/>
+    <context:component-scan base-package="org.jit4j.core.i18n.resource"/>
+    
+    <bean id="AuthorAdaptorHolder" class="org.jit4j.app.client.wrapper.statistics.AuthorAdaptorHolder">
+    	<property name="container">
+    		<map>
+    		<entry key="default" value-ref="defaultAuthorAdaptor"></entry>
+    		</map>
+    	</property>
+    </bean>
+    <bean id="defaultAuthorAdaptor" class="org.jit4j.app.client.wrapper.statistics.DefaultAuthorAdaptor"></bean> -->
+    
+    <bean id="dataDefHolder" class="dml.sz0099.course.app.data.DataDefHolder">
+    	<property name="dataConverterMap">
+    		<map>
+    		<entry key="sz0099_course_prod_coeGrade" value-ref="coeGradeConverter"></entry>
+    		</map>
+    	</property>
+    </bean>
+    <bean id="coeGradeConverter" class="dml.sz0099.course.app.data.CoeGradeConverter">
+    </bean>
+    
+    
+    <bean id="propertyHolder" class="dml.sz0099.course.app.data.PropertyHolder">
+    	<property name="propertyConverterMap">
+    		<map>
+    		<entry key="dml.sz0099.course.app.persist.entity.product.CoeProduct" value-ref="gradePropertyConverter"></entry>
+    		</map>
+    	</property>
+    </bean>
+    <bean id="gradePropertyConverter" class="dml.sz0099.course.app.data.converter.ceoproduct.GradePropertyConverter">
+    </bean>
+    
+    <context:component-scan base-package="dml.sz0099.course.app.data.show.blooming"/>
+    <context:component-scan base-package="dml.sz0099.course.app.data.handler"/>
+    <context:component-scan base-package="dml.sz0099.course.app.client.shiro.security.adaptor.aspect"/>
+    <aop:aspectj-autoproxy proxy-target-class="true"/> 
+	<bean id="registerAspect" class="dml.sz0099.course.app.client.shiro.security.adaptor.aspect.RegisterAspect"></bean>
+	
+    
+    <context:component-scan base-package="dml.sz0099.course.app.client.wrapper.product"/>
+    <context:component-scan base-package="dml.sz0099.course.app.client.validator.product"/>
+    <context:component-scan base-package="dml.sz0099.course.app.client.controller.product"/>
+    
+    <context:component-scan base-package="dml.sz0099.course.app.client.wrapper.order"/>
+    <context:component-scan base-package="dml.sz0099.course.app.client.validator.order"/>
+    <context:component-scan base-package="dml.sz0099.course.app.client.controller.order"/>
+    
+    <context:component-scan base-package="dml.sz0099.course.app.client.wrapper.paragraph"/>
+    <context:component-scan base-package="dml.sz0099.course.app.client.validator.paragraph"/>
+    <context:component-scan base-package="dml.sz0099.course.app.client.controller.paragraph"/>
+    
+    
+    <context:component-scan base-package="dml.sz0099.course.app.client.wrapper.profession"/>
+    <context:component-scan base-package="dml.sz0099.course.app.client.validator.profession"/>
+    <context:component-scan base-package="dml.sz0099.course.app.client.controller.profession"/>
+    
+    <context:component-scan base-package="dml.sz0099.course.app.client.wrapper.article"/>
+    <context:component-scan base-package="dml.sz0099.course.app.client.validator.article"/>
+    <context:component-scan base-package="dml.sz0099.course.app.client.controller.article"/>
+    
+    <context:component-scan base-package="dml.sz0099.course.app.client.wrapper.activity"/>
+    <context:component-scan base-package="dml.sz0099.course.app.client.validator.activity"/>
+    <context:component-scan base-package="dml.sz0099.course.app.client.controller.activity"/>
+    
+    <context:component-scan base-package="dml.sz0099.course.app.client.wrapper.category"/>
+    <context:component-scan base-package="dml.sz0099.course.app.client.validator.category"/>
+    <context:component-scan base-package="dml.sz0099.course.app.client.controller.category"/>
+    
+    <context:component-scan base-package="dml.sz0099.course.app.client.wrapper.media"/>
+    <context:component-scan base-package="dml.sz0099.course.app.client.validator.media"/>
+    <context:component-scan base-package="dml.sz0099.course.app.client.controller.media"/>
+    <!-- <context:component-scan base-package="dml.sz0099.course.app.client.resolver.media"/> -->
+    
+    <context:component-scan base-package="dml.sz0099.course.app.client.wrapper.position"/>
+    <context:component-scan base-package="dml.sz0099.course.app.client.validator.position"/>
+    <context:component-scan base-package="dml.sz0099.course.app.client.controller.position"/>
+    
+    <context:component-scan base-package="dml.sz0099.course.app.client.wrapper.user"/>
+    <context:component-scan base-package="dml.sz0099.course.app.client.validator.user"/>
+    <context:component-scan base-package="dml.sz0099.course.app.client.controller.user"/>
+    
+    
+    <context:component-scan base-package="dml.sz0099.course.app.client.wrapper.home"/>
+    <context:component-scan base-package="dml.sz0099.course.app.client.validator.home"/>
+    <context:component-scan base-package="dml.sz0099.course.app.client.controller.home"/>
+    <context:component-scan base-package="dml.sz0099.course.app.client.multi.fetch"/>
+    
+   <!-- 图片统一处理 -->
+    <bean id="imageRequestResolver" class="dml.sz0099.course.app.client.resolver.media.ImageRequestResolver">
+    	<property name="basePath" value="${file.upload.core.basePath}"></property>
+		<property name="basePathFolder" value="${file.upload.core.defaultPath.dir}"></property>
+		<property name="accessUrlBasePath" value="${file.upload.core.access.url.basePath}"></property>
+		<property name="accessUrlMapping" value="${file.upload.core.access.url.mapping}"></property>
+    
+    </bean>
+    
+    <bean id="imageProccessor" class="dml.sz0099.course.app.client.resolver.media.ImageProccessor">
+    <property name="adaptorContainer">
+    <!-- ImageExtend.positionId 要手工配置，从数据库获取id号，不配是无法正常运行的-->
+    	<map>
+    	<entry key="233123686197719040" value-ref="paragraphAdaptor"></entry>
+    	<entry key="234188807099609088" value-ref="personalSingleAdaptor"></entry>
+    	<entry key="234911858883784704" value-ref="paragProfessionAdaptor"></entry>
+    	<entry key="239677317680164864" value-ref="paragArticleAdaptor"></entry>
+    	<entry key="267808147690450944" value-ref="paragActivityAdaptor"></entry>
+    	
+    	<entry key="235209481654071296" value-ref="coverAdaptor"></entry>
+    	<entry key="235435892427943936" value-ref="coverProfessionAdaptor"></entry>
+    	<entry key="239663704290586624" value-ref="coverArticleAdaptor"></entry>
+    	<entry key="267807806798393344" value-ref="coverActivityAdaptor"></entry>
+   
+    	<entry key="235455742021955584" value-ref="bannerAdaptor"></entry>
+    	<entry key="235469848430997504" value-ref="bannerProfessionAdaptor"></entry>
+    	<entry key="239664146223427584" value-ref="bannerArticleAdaptor"></entry>
+    	<entry key="267807806873890816" value-ref="bannerActivityAdaptor"></entry>
+    	</map>
+    </property>
+    </bean>
+    <!-- 产品段落 -->
+    <bean id="paragraphAdaptor" class="dml.sz0099.course.app.client.resolver.adaptor.media.ParagraphAdaptor"></bean>
+    <!-- 用户头像、身份证正反面 -->
+    <bean id="personalSingleAdaptor" class="dml.sz0099.course.app.client.resolver.adaptor.media.PersonalSingleAdaptor"></bean>
+    <!-- 技能段落 -->
+    <bean id="paragProfessionAdaptor" class="dml.sz0099.course.app.client.resolver.adaptor.media.ParagProfessionAdaptor">
+    	<property name="basePath" value="${file.upload.core.basePath}"></property>
+		<property name="basePathFolder" value="${file.upload.core.defaultPath.dir}"></property>
+		<property name="accessUrlBasePath" value="${file.upload.core.access.url.basePath}"></property>
+		<property name="accessUrlMapping" value="${file.upload.core.access.url.mapping}"></property>
+    </bean>
+    <!-- 文章段落 -->
+    <bean id="paragArticleAdaptor" class="dml.sz0099.course.app.client.resolver.adaptor.media.ParagArticleAdaptor">
+    	<property name="basePath" value="${file.upload.core.basePath}"></property>
+		<property name="basePathFolder" value="${file.upload.core.defaultPath.dir}"></property>
+		<property name="accessUrlBasePath" value="${file.upload.core.access.url.basePath}"></property>
+		<property name="accessUrlMapping" value="${file.upload.core.access.url.mapping}"></property>
+    </bean>
+    <!-- 活动段落 -->
+    <bean id="paragActivityAdaptor" class="dml.sz0099.course.app.client.resolver.adaptor.media.ParagActivityAdaptor">
+    	<property name="basePath" value="${file.upload.core.basePath}"></property>
+		<property name="basePathFolder" value="${file.upload.core.defaultPath.dir}"></property>
+		<property name="accessUrlBasePath" value="${file.upload.core.access.url.basePath}"></property>
+		<property name="accessUrlMapping" value="${file.upload.core.access.url.mapping}"></property>
+    </bean>
+    
+    
+    <!-- 产品封面图 -->
+    <bean id="coverAdaptor" class="dml.sz0099.course.app.client.resolver.adaptor.media.CoverAdaptor"></bean>
+    <!-- 技能封面图 -->
+    <bean id="coverProfessionAdaptor" class="dml.sz0099.course.app.client.resolver.adaptor.media.CoverProfessionAdaptor">
+    	<property name="basePath" value="${file.upload.core.basePath}"></property>
+		<property name="basePathFolder" value="${file.upload.core.defaultPath.dir}"></property>
+		<property name="accessUrlBasePath" value="${file.upload.core.access.url.basePath}"></property>
+		<property name="accessUrlMapping" value="${file.upload.core.access.url.mapping}"></property>
+    
+    </bean>
+    <!-- 文章封面图 -->
+    <bean id="coverArticleAdaptor" class="dml.sz0099.course.app.client.resolver.adaptor.media.CoverArticleAdaptor">
+    	<property name="basePath" value="${file.upload.core.basePath}"></property>
+		<property name="basePathFolder" value="${file.upload.core.defaultPath.dir}"></property>
+		<property name="accessUrlBasePath" value="${file.upload.core.access.url.basePath}"></property>
+		<property name="accessUrlMapping" value="${file.upload.core.access.url.mapping}"></property>
+    </bean>
+    <!-- 活动封面图 -->
+    <bean id="coverActivityAdaptor" class="dml.sz0099.course.app.client.resolver.adaptor.media.CoverActivityAdaptor">
+    	<property name="basePath" value="${file.upload.core.basePath}"></property>
+		<property name="basePathFolder" value="${file.upload.core.defaultPath.dir}"></property>
+		<property name="accessUrlBasePath" value="${file.upload.core.access.url.basePath}"></property>
+		<property name="accessUrlMapping" value="${file.upload.core.access.url.mapping}"></property>
+    </bean>
+   
+    
+    <!-- 产品头部图 -->
+    <bean id="bannerAdaptor" class="dml.sz0099.course.app.client.resolver.adaptor.media.BannerAdaptor"></bean>
+    <!-- 技能头部图 -->
+    <bean id="bannerProfessionAdaptor" class="dml.sz0099.course.app.client.resolver.adaptor.media.BannerProfessionAdaptor">
+    	<property name="basePath" value="${file.upload.core.basePath}"></property>
+		<property name="basePathFolder" value="${file.upload.core.defaultPath.dir}"></property>
+		<property name="accessUrlBasePath" value="${file.upload.core.access.url.basePath}"></property>
+		<property name="accessUrlMapping" value="${file.upload.core.access.url.mapping}"></property>
+    </bean>
+     <!-- 文章头部图 -->
+    <bean id="bannerArticleAdaptor" class="dml.sz0099.course.app.client.resolver.adaptor.media.BannerArticleAdaptor">
+    	<property name="basePath" value="${file.upload.core.basePath}"></property>
+		<property name="basePathFolder" value="${file.upload.core.defaultPath.dir}"></property>
+		<property name="accessUrlBasePath" value="${file.upload.core.access.url.basePath}"></property>
+		<property name="accessUrlMapping" value="${file.upload.core.access.url.mapping}"></property>
+    </bean>
+    <!-- 活动头部图 -->
+    <bean id="bannerActivityAdaptor" class="dml.sz0099.course.app.client.resolver.adaptor.media.BannerActivityAdaptor">
+    	<property name="basePath" value="${file.upload.core.basePath}"></property>
+		<property name="basePathFolder" value="${file.upload.core.defaultPath.dir}"></property>
+		<property name="accessUrlBasePath" value="${file.upload.core.access.url.basePath}"></property>
+		<property name="accessUrlMapping" value="${file.upload.core.access.url.mapping}"></property>
+    </bean>
+    
+    
+    
+    <!-- 分类统一处理 -->
+    <bean id="categoryRequestResolver" class="dml.sz0099.course.app.client.resolver.category.CategoryRequestResolver">
+    </bean>
+    
+    <bean id="categoryProccessor" class="dml.sz0099.course.app.client.resolver.category.CategoryProccessor">
+    
+    <property name="adaptorContainer">
+    <!-- CategoryExtend.positionId 要手工配置，从数据库获取id号，不配是无法正常运行的-->
+    	<map>
+    	<entry key="235871259891298304" value-ref="categoryProductAdaptor"></entry>
+    	<entry key="239651588653412352" value-ref="categoryArticleAdaptor"></entry>
+    	<entry key="245350517894246400" value-ref="categoryProfessionAdaptor"></entry>
+    	<entry key="267027747124768768" value-ref="categoryActivityAdaptor"></entry>
+    	</map>
+    </property>
+    </bean>
+    
+    <bean id="categoryProductAdaptor" class="dml.sz0099.course.app.client.resolver.adaptor.category.CategoryProductAdaptor">
+    	<property name="categoryWrapper" ref="categoryWrapperImpl"></property>
+    	<property name="categoryExtendWrapper" ref="categoryExtendWrapperImpl"></property>
+    </bean>
+    
+    <bean id="categoryArticleAdaptor" class="dml.sz0099.course.app.client.resolver.adaptor.category.CategoryArticleAdaptor">
+    	<property name="categoryWrapper" ref="categoryWrapperImpl"></property>
+    	<property name="categoryExtendWrapper" ref="categoryExtendWrapperImpl"></property>
+    </bean>
+    
+    <bean id="categoryProfessionAdaptor" class="dml.sz0099.course.app.client.resolver.adaptor.category.CategoryProfessionAdaptor">
+    	<property name="categoryWrapper" ref="categoryWrapperImpl"></property>
+    	<property name="categoryExtendWrapper" ref="categoryExtendWrapperImpl"></property>
+    </bean>
+    
+    <bean id="categoryActivityAdaptor" class="dml.sz0099.course.app.client.resolver.adaptor.category.CategoryActivityAdaptor">
+    	<property name="categoryWrapper" ref="categoryWrapperImpl"></property>
+    	<property name="categoryExtendWrapper" ref="categoryExtendWrapperImpl"></property>
+    </bean>
+    
+    <bean id="categoryUtil" class="dml.sz0099.course.app.client.resolver.category.CategoryUtil">
+    	<property name="categoryWrapper" ref="categoryWrapperImpl"></property>
+    </bean>
+    
+    
+    
+    <!-- 位置统一处理 -->
+    <bean id="positionRequestResolver" class="dml.sz0099.course.app.client.resolver.position.PositionRequestResolver">
+    </bean>
+    
+    <bean id="positionProccessor" class="dml.sz0099.course.app.client.resolver.position.PositionProccessor">
+    
+    <property name="adaptorContainer">
+    <!-- positionExtend.positionId 要手工配置，从数据库获取id号，不配是无法正常运行的-->
+    	<map>
+    	<entry key="242156811024297984" value-ref="positionArticleAdaptor"></entry>
+    	<entry key="242156981732470784" value-ref="positionProfessionAdaptor"></entry>
+    	<entry key="267027266277175296" value-ref="positionActivityAdaptor"></entry>
+    	</map>
+    </property>
+    </bean>
+    <!-- 
+    <bean id="positionProductAdaptor" class="dml.sz0099.course.app.client.resolver.adaptor.position.PositionProductAdaptor">
+    	<property name="positionWrapper" ref="positionWrapperImpl"></property>
+    	<property name="positionExtendWrapper" ref="positionExtendWrapperImpl"></property>
+    </bean>
+     -->
+    <bean id="positionArticleAdaptor" class="dml.sz0099.course.app.client.resolver.adaptor.position.PositionArticleAdaptor">
+    	<!-- <property name="positionWrapper" ref="positionWrapperImpl"></property>
+    	<property name="positionExtendWrapper" ref="positionExtendWrapperImpl"></property> -->
+    	<property name="refHandlerHolder" ref="refHandlerHolderMap">
+    	</property>
+    </bean>
+    
+    <bean id="positionActivityAdaptor" class="dml.sz0099.course.app.client.resolver.adaptor.position.PositionActivityAdaptor">
+    	<!-- <property name="positionWrapper" ref="positionWrapperImpl"></property>
+    	<property name="positionExtendWrapper" ref="positionExtendWrapperImpl"></property> -->
+    	<property name="refHandlerHolder" ref="refHandlerHolderMap">
+    	</property>
+    </bean>
+    
+    <bean id="refDefaultHandler" class="dml.sz0099.course.app.client.resolver.position.RefDefaultHandler"></bean>
+    <bean id="refCoeArticleHandler" class="dml.sz0099.course.app.client.resolver.handler.position.RefCoeArticleHandler"></bean>
+    <bean id="refProfessionHandler" class="dml.sz0099.course.app.client.resolver.handler.position.RefProfessionHandler"></bean>
+    <bean id="refCoeActivityHandler" class="dml.sz0099.course.app.client.resolver.handler.position.RefCoeActivityHandler"></bean>
+    
+    <util:map id="refHandlerHolderMap">
+    <!-- 根据PositionRef.viewType来判定 -->
+    <entry key="0" value-ref="refDefaultHandler"></entry>
+    <entry key="1" value-ref="refCoeArticleHandler"></entry>
+    <entry key="3" value-ref="refProfessionHandler"></entry>
+    <entry key="4" value-ref="refCoeActivityHandler"></entry>
+    </util:map>
+    
+    
+    <bean id="positionProfessionAdaptor" class="dml.sz0099.course.app.client.resolver.adaptor.position.PositionProfessionAdaptor">
+    	<!-- <property name="positionWrapper" ref="positionWrapperImpl"></property>
+    	<property name="positionExtendWrapper" ref="positionExtendWrapperImpl"></property> -->
+    	<property name="refHandlerHolder" ref="refHandlerHolderMap">
+    	</property>
+    </bean>
+    
+    
+    
+     <!-- 技能统一处理 -->
+    <bean id="professionRequestResolver" class="dml.sz0099.course.app.client.resolver.profession.ProfessionRequestResolver">
+    </bean>
+    
+    <bean id="professionProccessor" class="dml.sz0099.course.app.client.resolver.profession.ProfessionProccessor">
+    
+    <property name="adaptorContainer">
+    <!-- ProfessionExtend.positionId 要手工配置，从数据库获取id号，不配是无法正常运行的-->
+    	<map>
+    	<entry key="246150346295701504" value-ref="professionArticleAdaptor"></entry>
+    	</map>
+    </property>
+    </bean>
+    
+    <bean id="professionArticleAdaptor" class="dml.sz0099.course.app.client.resolver.adaptor.profession.ProfessionArticleAdaptor">
+    	<property name="refHandlerHolder" ref="professionRefHandlerHolderMap">
+    	</property>
+    </bean>
+    <util:map id="professionRefHandlerHolderMap">
+    <!-- 根据ProfessionRef.viewType来判定 -->
+    <entry key="0" value-ref="professionRefDefaultHandler"></entry>
+    <entry key="1" value-ref="professionRefArticleHandler"></entry>
+    </util:map>
+    <bean id="professionRefDefaultHandler" class="dml.sz0099.course.app.client.resolver.profession.ProfessionRefDefaultHandler"></bean>
+    <bean id="professionRefArticleHandler" class="dml.sz0099.course.app.client.resolver.handler.profession.ProfessionRefArticleHandler"></bean>
+    
+    
+    <!-- 圆形菜单：文章配置 -->
+    <bean id="coeArticleConverter" class="dml.sz0099.course.app.data.show.blooming.converter.CoeArticleConverter">
+    	<property name="mainCircleConfig" ref="mainCircleConfigArticle"></property>
+    </bean>
+    <bean id="mainCircleConfigArticle" class="dml.sz0099.course.app.data.show.blooming.config.MainCircleConfig">
+    	<property name="linkHuan" value="${web.view.blooming.linkHuan.article}"></property>
+    	<property name="linkBang" value="${web.view.blooming.linkBang}"></property>
+    	<property name="linkXin" value="${web.view.blooming.linkXin}"></property>
+    	<property name="labelArray" value="${web.view.blooming.labelArray}"></property>
+    	<property name="imageUrlBangArray" value="${web.view.blooming.imageUrlBangArray}"></property>
+    	<property name="imageUrlHuanArray" value="${web.view.blooming.imageUrlHuanArray}"></property>
+    	<property name="imageUrlXinArray" value="${web.view.blooming.imageUrlXinArray}"></property>
+    	<property name="imageUrlHeadArray" value="${web.view.blooming.imageUrlHeadArray}"></property>
+    	<property name="imageUrlYinArray" value="${web.view.blooming.imageUrlYinArray}"></property>
+    	<property name="imageUrlJianArray" value="${web.view.blooming.imageUrlJianArray}"></property>
+    </bean>
+    
+    <!-- 圆形菜单：技能配置 -->
+    <bean id="professionConverter" class="dml.sz0099.course.app.data.show.blooming.converter.ProfessionConverter">
+    	<property name="mainCircleConfig" ref="mainCircleConfigProfession"></property>
+    </bean>
+    <bean id="mainCircleConfigProfession" class="dml.sz0099.course.app.data.show.blooming.config.MainCircleConfig">
+    	<property name="linkHuan" value="${web.view.blooming.linkHuan}"></property>
+    	<property name="linkBang" value="${web.view.blooming.linkBang}"></property>
+    	<property name="linkXin" value="${web.view.blooming.linkXin}"></property>
+    	<property name="labelArray" value="${web.view.blooming.labelArray}"></property>
+    	<property name="imageUrlBangArray" value="${web.view.blooming.imageUrlBangArray}"></property>
+    	<property name="imageUrlHuanArray" value="${web.view.blooming.imageUrlHuanArray}"></property>
+    	<property name="imageUrlXinArray" value="${web.view.blooming.imageUrlXinArray}"></property>
+    	<property name="imageUrlHeadArray" value="${web.view.blooming.imageUrlHeadArray}"></property>
+    	<property name="imageUrlYinArray" value="${web.view.blooming.imageUrlYinArray}"></property>
+    	<property name="imageUrlJianArray" value="${web.view.blooming.imageUrlJianArray}"></property>
+    </bean>
+    
+    
+    <!-- 圆形菜单：活动配置 -->
+    <bean id="coeActivityConverter" class="dml.sz0099.course.app.data.show.blooming.converter.CoeActivityConverter">
+    	<property name="mainCircleConfig" ref="mainCircleConfigArticle"></property>
+    </bean>
+    <bean id="mainCircleConfigActivity" class="dml.sz0099.course.app.data.show.blooming.config.MainCircleConfig">
+    	<property name="linkHuan" value="${web.view.blooming.linkHuan.article}"></property>
+    	<property name="linkBang" value="${web.view.blooming.linkBang}"></property>
+    	<property name="linkXin" value="${web.view.blooming.linkXin}"></property>
+    	<property name="labelArray" value="${web.view.blooming.labelArray}"></property>
+    	<property name="imageUrlBangArray" value="${web.view.blooming.imageUrlBangArray}"></property>
+    	<property name="imageUrlHuanArray" value="${web.view.blooming.imageUrlHuanArray}"></property>
+    	<property name="imageUrlXinArray" value="${web.view.blooming.imageUrlXinArray}"></property>
+    	<property name="imageUrlHeadArray" value="${web.view.blooming.imageUrlHeadArray}"></property>
+    	<property name="imageUrlYinArray" value="${web.view.blooming.imageUrlYinArray}"></property>
+    	<property name="imageUrlJianArray" value="${web.view.blooming.imageUrlJianArray}"></property>
+    </bean>
+    
+    <!-- 活动位置元素获取器 -->
+    <bean id="coeActivityFetcher" class="dml.sz0099.course.app.data.show.layout.fetcher.CoeActivityFetcher">
+    	<property name="positionActivityAdaptor" ref="positionActivityAdaptor"></property>
+    	<property name="flagFetcherConfigQX" ref="flagFetcherConfigQX"></property>
+    	<property name="flagFetcherConfigXF" ref="flagFetcherConfigXF"></property>
+    	<property name="roadLineFetcherConfigQX" ref="roadLineFetcherConfigQX"></property>
+    </bean>
+    
+    <!-- 文章位置元素获取器 -->
+    <bean id="coeArticleFetcher" class="dml.sz0099.course.app.data.show.layout.fetcher.CoeArticleFetcher">
+    	<property name="positionArticleAdaptor" ref="positionArticleAdaptor"></property>
+    	<property name="flagFetcherConfigQX" ref="flagFetcherConfigQX"></property>
+    	<property name="flagFetcherConfigXF" ref="flagFetcherConfigXF"></property>
+    	<property name="roadLineFetcherConfigQX" ref="roadLineFetcherConfigQX"></property>
+    </bean>
+    
+    
+    <!-- 群侠旗帜 -->
+    <bean id="flagFetcherConfigQX" class="dml.sz0099.course.app.data.show.blooming.config.FlagFetcherConfig">
+	    <property name="content" ref="coeArticlePositionListQX"> </property>
+	    <property name="defaultPosition" ref="coeArticlePositionQX1"> </property>
+    </bean>
+    <util:list id="coeArticlePositionListQX">
+	    <ref bean="coeArticlePositionQX1"/>
+	    <ref bean="coeArticlePositionQX2"/>
+	    <ref bean="coeArticlePositionQX3"/>
+    </util:list>
+    <bean id="coeArticlePositionQX1" class="dml.sz0099.course.app.persist.entity.article.CoeArticlePosition">
+    	<property name="coverImage" value="${web.view.blooming.fetcher.flagFetcherConfigQX.1.coverImage}"></property>
+	    <property name="title" value="${web.view.blooming.fetcher.flagFetcherConfigQX.1.title}"></property>
+	    <property name="subTitle" value="${web.view.blooming.fetcher.flagFetcherConfigQX.1.subTitle}"></property>
+	    <property name="link" value="${web.view.blooming.fetcher.flagFetcherConfigQX.1.link}"></property>
+	    <property name="preIntro" value="${web.view.blooming.fetcher.flagFetcherConfigQX.1.preIntro}"></property>
+    </bean>
+    <bean id="coeArticlePositionQX2" class="dml.sz0099.course.app.persist.entity.article.CoeArticlePosition">
+    	<property name="coverImage" value="${web.view.blooming.fetcher.flagFetcherConfigQX.2.coverImage}"></property>
+	    <property name="title" value="${web.view.blooming.fetcher.flagFetcherConfigQX.2.title}"></property>
+	    <property name="subTitle" value="${web.view.blooming.fetcher.flagFetcherConfigQX.2.subTitle}"></property>
+	    <property name="link" value="${web.view.blooming.fetcher.flagFetcherConfigQX.2.link}"></property>
+	    <property name="preIntro" value="${web.view.blooming.fetcher.flagFetcherConfigQX.2.preIntro}"></property>
+    </bean>
+    <bean id="coeArticlePositionQX3" class="dml.sz0099.course.app.persist.entity.article.CoeArticlePosition">
+    	<property name="coverImage" value="${web.view.blooming.fetcher.flagFetcherConfigQX.3.coverImage}"></property>
+	    <property name="title" value="${web.view.blooming.fetcher.flagFetcherConfigQX.3.title}"></property>
+	    <property name="subTitle" value="${web.view.blooming.fetcher.flagFetcherConfigQX.3.subTitle}"></property>
+	    <property name="link" value="${web.view.blooming.fetcher.flagFetcherConfigQX.3.link}"></property>
+	    <property name="preIntro" value="${web.view.blooming.fetcher.flagFetcherConfigQX.3.preIntro}"></property>
+    </bean>
+    <!-- 雪峰旗帜 -->
+    <bean id="flagFetcherConfigXF" class="dml.sz0099.course.app.data.show.blooming.config.FlagFetcherConfig">
+    	<property name="content" ref="coeArticlePositionListXF"> </property>
+	    <property name="defaultPosition" ref="coeArticlePositionXF1"> </property>
+    </bean>
+    <util:list id="coeArticlePositionListXF">
+	    <ref bean="coeArticlePositionXF1"/>
+	    <ref bean="coeArticlePositionXF2"/>
+	    <ref bean="coeArticlePositionXF3"/>
+    </util:list>
+    <bean id="coeArticlePositionXF1" class="dml.sz0099.course.app.persist.entity.article.CoeArticlePosition">
+    	<property name="coverImage" value="${web.view.blooming.fetcher.flagFetcherConfigXF.1.coverImage}"></property>
+	    <property name="title" value="${web.view.blooming.fetcher.flagFetcherConfigXF.1.title}"></property>
+	    <property name="subTitle" value="${web.view.blooming.fetcher.flagFetcherConfigXF.1.subTitle}"></property>
+	    <property name="link" value="${web.view.blooming.fetcher.flagFetcherConfigXF.1.link}"></property>
+	    <property name="preIntro" value="${web.view.blooming.fetcher.flagFetcherConfigXF.1.preIntro}"></property>
+    </bean>
+    <bean id="coeArticlePositionXF2" class="dml.sz0099.course.app.persist.entity.article.CoeArticlePosition">
+    	<property name="coverImage" value="${web.view.blooming.fetcher.flagFetcherConfigXF.2.coverImage}"></property>
+	    <property name="title" value="${web.view.blooming.fetcher.flagFetcherConfigXF.2.title}"></property>
+	    <property name="subTitle" value="${web.view.blooming.fetcher.flagFetcherConfigXF.2.subTitle}"></property>
+	    <property name="link" value="${web.view.blooming.fetcher.flagFetcherConfigXF.2.link}"></property>
+	    <property name="preIntro" value="${web.view.blooming.fetcher.flagFetcherConfigXF.2.preIntro}"></property>
+    </bean>
+    <bean id="coeArticlePositionXF3" class="dml.sz0099.course.app.persist.entity.article.CoeArticlePosition">
+    	<property name="coverImage" value="${web.view.blooming.fetcher.flagFetcherConfigXF.3.coverImage}"></property>
+	    <property name="title" value="${web.view.blooming.fetcher.flagFetcherConfigXF.3.title}"></property>
+	    <property name="subTitle" value="${web.view.blooming.fetcher.flagFetcherConfigXF.3.subTitle}"></property>
+	    <property name="link" value="${web.view.blooming.fetcher.flagFetcherConfigXF.3.link}"></property>
+	    <property name="preIntro" value="${web.view.blooming.fetcher.flagFetcherConfigXF.3.preIntro}"></property>
+    </bean>
+    
+    <!-- 路线 -->
+    <bean id="roadLineFetcherConfigQX" class="dml.sz0099.course.app.data.show.blooming.config.FlagFetcherConfig">
+	    <property name="content" ref="roadLineListQX"> </property>
+	    <property name="defaultPosition" ref="roadLineQX1"> </property>
+    </bean>
+    <util:list id="roadLineListQX">
+	    <ref bean="roadLineQX1"/>
+	    <ref bean="roadLineQX2"/>
+	    <ref bean="roadLineQX3"/>
+    </util:list>
+    <bean id="roadLineQX1" class="dml.sz0099.course.app.persist.entity.article.CoeArticlePosition">
+    	<property name="coverImage" value="${web.view.blooming.fetcher.roadLineFetcherConfigQX.1.coverImage}"></property>
+	    <property name="title" value="${web.view.blooming.fetcher.roadLineFetcherConfigQX.1.title}"></property>
+	    <property name="subTitle" value="${web.view.blooming.fetcher.roadLineFetcherConfigQX.1.subTitle}"></property>
+	    <property name="link" value="${web.view.blooming.fetcher.roadLineFetcherConfigQX.1.link}"></property>
+	    <property name="preIntro" value="${web.view.blooming.fetcher.roadLineFetcherConfigQX.1.preIntro}"></property>
+    </bean>
+    <bean id="roadLineQX2" class="dml.sz0099.course.app.persist.entity.article.CoeArticlePosition">
+    	<property name="coverImage" value="${web.view.blooming.fetcher.roadLineFetcherConfigQX.2.coverImage}"></property>
+	    <property name="title" value="${web.view.blooming.fetcher.roadLineFetcherConfigQX.2.title}"></property>
+	    <property name="subTitle" value="${web.view.blooming.fetcher.roadLineFetcherConfigQX.2.subTitle}"></property>
+	    <property name="link" value="${web.view.blooming.fetcher.roadLineFetcherConfigQX.2.link}"></property>
+	    <property name="preIntro" value="${web.view.blooming.fetcher.roadLineFetcherConfigQX.2.preIntro}"></property>
+    </bean>
+    <bean id="roadLineQX3" class="dml.sz0099.course.app.persist.entity.article.CoeArticlePosition">
+    	<property name="coverImage" value="${web.view.blooming.fetcher.roadLineFetcherConfigQX.3.coverImage}"></property>
+	    <property name="title" value="${web.view.blooming.fetcher.roadLineFetcherConfigQX.3.title}"></property>
+	    <property name="subTitle" value="${web.view.blooming.fetcher.roadLineFetcherConfigQX.3.subTitle}"></property>
+	    <property name="link" value="${web.view.blooming.fetcher.roadLineFetcherConfigQX.3.link}"></property>
+	    <property name="preIntro" value="${web.view.blooming.fetcher.roadLineFetcherConfigQX.3.preIntro}"></property>
+    </bean>
+    
+    <!-- 技能位置元素获取器 -->
+    <bean id="professionFetcher" class="dml.sz0099.course.app.data.show.layout.fetcher.ProfessionFetcher">
+    	<property name="positionProfessionAdaptor" ref="positionProfessionAdaptor"></property>
+    	<property name="ingenuityFetcherConfigQX" ref="ingenuityFetcherConfigQX"></property>
+    	<property name="recommendFetcherConfigQX" ref="recommendFetcherConfigQX"></property>
+    </bean>
+    
+    <!-- 匠心 -->
+    <bean id="ingenuityFetcherConfigQX" class="dml.sz0099.course.app.data.show.blooming.config.IngenuityFetcherConfig">
+	    <property name="content" ref="professionPositionListQX"> </property>
+	    <property name="defaultPosition" ref="professionPositionQX1"> </property>
+    </bean>
+    <util:list id="professionPositionListQX">
+	    <ref bean="professionPositionQX1"/>
+	    <!-- 
+	    <ref bean="professionPositionQX2"/>
+	    <ref bean="professionPositionQX3"/>
+	     -->
+    </util:list>
+    <bean id="professionPositionQX1" class="dml.sz0099.course.app.persist.entity.profession.ProfessionPosition">
+    	<property name="coverImage" value="${web.view.blooming.fetcher.ingenuityFetcherConfigQX.1.coverImage}"></property>
+	    <property name="title" value="${web.view.blooming.fetcher.ingenuityFetcherConfigQX.1.title}"></property>
+	    <property name="subTitle" value="${web.view.blooming.fetcher.ingenuityFetcherConfigQX.1.subTitle}"></property>
+	    <property name="link" value="${web.view.blooming.fetcher.ingenuityFetcherConfigQX.1.link}"></property>
+	    <property name="preIntro" value="${web.view.blooming.fetcher.ingenuityFetcherConfigQX.1.preIntro}"></property>
+    </bean>
+    <bean id="professionPositionQX2" class="dml.sz0099.course.app.persist.entity.profession.ProfessionPosition">
+    	<property name="coverImage" value="${web.view.blooming.fetcher.ingenuityFetcherConfigQX.2.coverImage}"></property>
+	    <property name="title" value="${web.view.blooming.fetcher.ingenuityFetcherConfigQX.2.title}"></property>
+	    <property name="subTitle" value="${web.view.blooming.fetcher.ingenuityFetcherConfigQX.2.subTitle}"></property>
+	    <property name="link" value="${web.view.blooming.fetcher.ingenuityFetcherConfigQX.2.link}"></property>
+	    <property name="preIntro" value="${web.view.blooming.fetcher.ingenuityFetcherConfigQX.2.preIntro}"></property>
+    </bean>
+    <bean id="professionPositionQX3" class="dml.sz0099.course.app.persist.entity.profession.ProfessionPosition">
+    	<property name="coverImage" value="${web.view.blooming.fetcher.ingenuityFetcherConfigQX.3.coverImage}"></property>
+	    <property name="title" value="${web.view.blooming.fetcher.ingenuityFetcherConfigQX.3.title}"></property>
+	    <property name="subTitle" value="${web.view.blooming.fetcher.ingenuityFetcherConfigQX.3.subTitle}"></property>
+	    <property name="link" value="${web.view.blooming.fetcher.ingenuityFetcherConfigQX.3.link}"></property>
+	    <property name="preIntro" value="${web.view.blooming.fetcher.ingenuityFetcherConfigQX.3.preIntro}"></property>
+    </bean>
+    
+    <!-- 技能推荐 -->
+    <bean id="recommendFetcherConfigQX" class="dml.sz0099.course.app.data.show.blooming.config.IngenuityFetcherConfig">
+	    <property name="content" ref="recommendPositionListQX"> </property>
+	    <property name="defaultPosition" ref="recommendPositionQX1"> </property>
+    </bean>
+    <util:list id="recommendPositionListQX">
+	    <ref bean="recommendPositionQX1"/>
+	    <!-- 
+	    <ref bean="recommendPositionQX2"/>
+	    <ref bean="recommendPositionQX3"/>
+	     -->
+    </util:list>
+    <bean id="recommendPositionQX1" class="dml.sz0099.course.app.persist.entity.profession.ProfessionPosition">
+    	<property name="coverImage" value="${web.view.blooming.fetcher.recommendFetcherConfigQX.1.coverImage}"></property>
+	    <property name="title" value="${web.view.blooming.fetcher.recommendFetcherConfigQX.1.title}"></property>
+	    <property name="subTitle" value="${web.view.blooming.fetcher.recommendFetcherConfigQX.1.subTitle}"></property>
+	    <property name="link" value="${web.view.blooming.fetcher.recommendFetcherConfigQX.1.link}"></property>
+	    <property name="preIntro" value="${web.view.blooming.fetcher.recommendFetcherConfigQX.1.preIntro}"></property>
+    </bean>
+    <bean id="recommendPositionQX2" class="dml.sz0099.course.app.persist.entity.profession.ProfessionPosition">
+    	<property name="coverImage" value="${web.view.blooming.fetcher.recommendFetcherConfigQX.2.coverImage}"></property>
+	    <property name="title" value="${web.view.blooming.fetcher.recommendFetcherConfigQX.2.title}"></property>
+	    <property name="subTitle" value="${web.view.blooming.fetcher.recommendFetcherConfigQX.2.subTitle}"></property>
+	    <property name="link" value="${web.view.blooming.fetcher.recommendFetcherConfigQX.2.link}"></property>
+	    <property name="preIntro" value="${web.view.blooming.fetcher.recommendFetcherConfigQX.2.preIntro}"></property>
+    </bean>
+    <bean id="recommendPositionQX3" class="dml.sz0099.course.app.persist.entity.profession.ProfessionPosition">
+    	<property name="coverImage" value="${web.view.blooming.fetcher.recommendFetcherConfigQX.3.coverImage}"></property>
+	    <property name="title" value="${web.view.blooming.fetcher.recommendFetcherConfigQX.3.title}"></property>
+	    <property name="subTitle" value="${web.view.blooming.fetcher.recommendFetcherConfigQX.3.subTitle}"></property>
+	    <property name="link" value="${web.view.blooming.fetcher.recommendFetcherConfigQX.3.link}"></property>
+	    <property name="preIntro" value="${web.view.blooming.fetcher.recommendFetcherConfigQX.3.preIntro}"></property>
+    </bean>
+    
+</beans>

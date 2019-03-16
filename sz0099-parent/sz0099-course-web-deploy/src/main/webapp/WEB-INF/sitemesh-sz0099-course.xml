@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sitemesh>
+
+ <content-processor>
+    <tag-rule-bundle class="org.sitemesh.content.tagrules.html.DivExtractingTagRuleBundle"/>
+  </content-processor>
+	
+	<mapping path="/asserts/*" exclude="true"/>
+	<mapping path="/assets/*" exclude="true"/>
+	<mapping path="/sf/*" exclude="true"/>
+	<mapping path="/avatar/*" exclude="true"/>
+	<mapping path="/gene/*" exclude="true"/>
+	<mapping path="/upload/*" exclude="true"/>
+	
+	<!-- for element ui -->
+	<mapping>
+	    <path>/element/index</path>
+	    <decorator>/decorators/common/default/classic/el_html_container.ftl</decorator>
+	    <decorator>/decorators/common/default/el_layout_classic.ftl</decorator>
+ 	</mapping>
+	
+	<!-- for bootstrap -->
+	 <mapping>
+	    <path>/index</path>
+	    <decorator>/decorators/common/default/classic/html_container.ftl</decorator>
+	    <decorator>/decorators/common/default/layout_classic3.ftl</decorator>
+ 	</mapping> 
+ 	
+ 	<mapping>
+	    <path>/home</path>
+	    <decorator>/decorators/common/default/classic/html_container.ftl</decorator>
+	    <decorator>/decorators/common/default/layout_classic3.ftl</decorator>
+ 	</mapping>
+ 	
+ 	<mapping>
+ 	<path>/help/hzj</path>
+		<decorator>/decorators/common/default/classic/html_container.ftl</decorator>
+	    <decorator>/decorators/common/default/layout_classic4.ftl</decorator>
+ 	</mapping>
+ 	
+	<mapping>
+	    <path>/quan/*</path>
+	    <path>/help/*</path>
+	    <path>/tech/*</path>
+	    <path>/auth/*</path>
+	    <path>/auth/role/manage/editUI*</path>
+	    <path>/basic/autologincheckUI*</path>
+	    <path>/ood/*</path>
+	    <path>/sz0099/*</path>
+	    <decorator>/decorators/common/default/classic/html_container.ftl</decorator>
+	    <decorator>/decorators/common/default/layout_classic3.ftl</decorator>
+ 	</mapping>
+ 	<mapping>
+	    <path>/sz0099/ood/article/manage/create</path>
+	    <path>/sz0099/ood/activity/manage/create</path>
+	    <path>/sz0099/ood/personal/profession/manage/create</path>
+	    <decorator>/decorators/common/default/classic/html_container.ftl</decorator>
+	    <decorator>/decorators/common/default/layout_classic_manage.ftl</decorator>
+ 	</mapping>
+ 	
+ 	<mapping exclude="true">
+ 	
+	    <path>/tech/doInitData/appModule</path>
+	    <path>/tech/doInitData/initWechatConfig</path>
+ 	 
+	    <path>/pay/wechat/notify*</path>
+	    <path>/auth/user/mergeAgree</path>
+	    <path>/auth/role/manage/findRoleForEditUI</path>
+	    <path>/auth/role/manage/merge</path>
+	    <path>/auth/role/manage/delete</path>
+	    <path>/auth/role/manage/add</path>
+	    <path>/auth/userRole/manage/findUserRoleForEditUI</path>
+	    <path>/auth/userRole/manage/merge</path>
+	    <path>/auth/userRole/manage/delete</path>
+	    <path>/auth/userRole/manage/add</path>
+	    <path>/auth/userRole/manage/editUI</path>
+	    <path>/auth/userqr/viewInvite/ansy</path>
+	    <path>/auth/userqr/manage/refreshSingleRef</path>
+	    
+	    
+	    <path>/sz0099/ood/product/buyInstruction</path>
+	    <path>/sz0099/ood/product/preOrder</path>
+	    <path>/sz0099/ood/product/order/confirm</path>
+	    <path>/sz0099/ood/product/order/queryPullCode</path>
+	    <path>/sz0099/ood/product/order/modifyEmail</path>
+	    <path>/sz0099/ood/product/order/doModifyEmail</path>
+	    <path>/sz0099/ood/product/order/manage/mergeForInprocess</path>
+	    <path>/sz0099/ood/product/order/manage/mergeForSent</path>
+	    
+	    <path>/sz0099/ood/product/manage/merge/*</path>
+	    <path>/sz0099/ood/product/manage/paragraph/*</path>
+	    <path>/sz0099/ood/product/manage/tag/*</path>
+	    <path>/sz0099/ood/product/personal/myinfo/*</path>
+	    <path>/sz0099/ood/media/operate/*</path>
+	    <path>/sz0099/ood/personal/myinfo/idverify</path>
+	    <path>/sz0099/ood/personal/myinfo/applyIdentity</path>
+	    <path>/sz0099/ood/personal/myinfo/idverifyPass</path>
+	    <path>/sz0099/ood/personal/myinfo/idverifyReject</path>
+	    <path>/sz0099/ood/personal/myinfo/doModifyRealname</path>
+	    
+	    
+	    <path>/sz0099/ood/personal/profession/manage/edit*</path>
+	    <path>/sz0099/ood/personal/profession/manage/merge*</path>
+	    <path>/sz0099/ood/personal/profession/manage/delete*</path>
+	    <path>/sz0099/ood/personal/profession/manage/paragraph/*</path>
+	    <path>/sz0099/ood/personal/profession/manage/tag/*</path>
+	    <path>/sz0099/ood/personal/profession/manage/bindListUI</path>
+	    <path>/sz0099/ood/personal/profession/manage/selectNeedBindRefList</path>
+	    <path>/sz0099/ood/personal/profession/manage/queryDraftList/ansy*</path>
+	    <path>/sz0099/ood/personal/profession/manage/queryProfessionManageList/ansy*</path>
+	    <path>/sz0099/ood/personal/profession/manage/queryProfessionList/ansy*</path>
+	    <path>/sz0099/ood/personal/profession/manage/queryDetailList/ansy*</path>
+	    <path>/sz0099/ood/personal/profession/manage/searchProfessionList/ansy*</path>
+	    <path>/sz0099/ood/personal/profession/praise*</path>
+	    <path>/sz0099/ood/personal/profession/doPraise*</path>
+	    <path>/sz0099/ood/personal/profession/refreshPraise*</path>
+	    <path>/sz0099/ood/personal/profession/favirate*</path>
+	    <path>/sz0099/ood/personal/profession/ref/manage/*</path>
+	    <path>/sz0099/ood/personal/profession/changeByUserId*</path>
+	    <path>/sz0099/ood/personal/profession/findByUserId*</path>
+	    <path>/sz0099/ood/personal/profession/manage/detailPreview*</path>
+	    <path>/sz0099/ood/personal/profession/parag/create</path>
+	    <path>/sz0099/ood/personal/profession/parag/delete</path>
+	    <path>/sz0099/ood/personal/profession/parag/mergeRefForDescription</path>
+	    <path>/sz0099/ood/personal/profession/parag/deleteImageById</path>
+	    <path>/sz0099/ood/personal/profession/parag/addImageById</path>
+	    <path>/sz0099/ood/personal/profession/parag/changeImageById</path>
+	    <path>/sz0099/ood/personal/profession/parag/mergeRefForOrder</path>
+	    <path>/sz0099/ood/personal/profession/manage/merge/title/ansy</path>
+	    <path>/sz0099/ood/personal/profession/manage/merge/description/ansy</path>
+	    
+	    <path>/sz0099/ood/personal/profession/cover/create</path>
+	    <path>/sz0099/ood/personal/profession/cover/delete</path>
+	    <path>/sz0099/ood/personal/profession/cover/mergeRefForDescription</path>
+	    <path>/sz0099/ood/personal/profession/cover/deleteImageById</path>
+	    <path>/sz0099/ood/personal/profession/cover/addImageById</path>
+	    <path>/sz0099/ood/personal/profession/cover/changeImageById</path>
+	    <path>/sz0099/ood/personal/profession/cover/mergeRefForOrder</path>
+	    
+	    <path>/sz0099/ood/personal/profession/banner/create</path>
+	    <path>/sz0099/ood/personal/profession/banner/delete</path>
+	    <path>/sz0099/ood/personal/profession/banner/mergeRefForDescription</path>
+	    <path>/sz0099/ood/personal/profession/banner/deleteImageById</path>
+	    <path>/sz0099/ood/personal/profession/banner/addImageById</path>
+	    <path>/sz0099/ood/personal/profession/banner/changeImageById</path>
+	    <path>/sz0099/ood/personal/profession/banner/mergeRefForOrder</path>
+	    
+	    
+	    <path>/sz0099/ood/category/extend/manage/merge*</path>
+	    <path>/sz0099/ood/category/extend/manage/delete*</path>
+	    <path>/sz0099/ood/category/manage/editListUI*</path>
+	    <path>/sz0099/ood/category/manage/subEditListUI*</path>
+	    <path>/sz0099/ood/category/manage/*</path>
+	    <path>/sz0099/ood/category/ref/change*</path>
+	    
+	    <path>/sz0099/ood/position/extend/manage/merge*</path>
+	    <path>/sz0099/ood/position/extend/manage/delete*</path>
+	    <path>/sz0099/ood/position/manage/editListUI*</path>
+	    <path>/sz0099/ood/position/manage/subEditListUI*</path>
+	    <path>/sz0099/ood/position/manage/*</path>
+	    <path>/sz0099/ood/position/ref/change*</path>
+	    <path>/sz0099/ood/position/ref/manage/*</path>
+	    
+	    
+	    <path>/sz0099/ood/article/buyInstruction</path>
+	    <path>/sz0099/ood/article/preOrder</path>
+	    <path>/sz0099/ood/article/order/confirm</path>
+	    <path>/sz0099/ood/article/order/queryPullCode</path>
+	    <path>/sz0099/ood/article/order/modifyEmail</path>
+	    <path>/sz0099/ood/article/order/doModifyEmail</path>
+	    <path>/sz0099/ood/article/order/manage/mergeForInprocess</path>
+	    <path>/sz0099/ood/article/order/manage/mergeForSent</path>
+	    
+	    <path>/sz0099/ood/article/manage/merge/*</path>
+	    <path>/sz0099/ood/article/manage/paragraph/*</path>
+	    <path>/sz0099/ood/article/manage/tag/*</path>
+	    <path>/sz0099/ood/article/manage/queryDraftList/ansy*</path>
+	    <path>/sz0099/ood/article/manage/queryArticleManageList/ansy*</path>
+	    <path>/sz0099/ood/article/manage/queryArticleList/ansy*</path>
+	    <path>/sz0099/ood/article/manage/searchArticleList/ansy*</path>
+	    <path>/sz0099/ood/article/personal/myinfo/*</path>
+	    <path>/sz0099/ood/article/praise*</path>
+	    <path>/sz0099/ood/article/doPraise*</path>
+	    <path>/sz0099/ood/article/refreshPraise*</path>
+	    <path>/sz0099/ood/article/favirate*</path>
+	    <path>/sz0099/ood/article/findRelative*</path>
+	    <path>/sz0099/ood/article/parag/create</path>
+	    <path>/sz0099/ood/article/parag/delete</path>
+	    <path>/sz0099/ood/article/parag/mergeRefForDescription</path>
+	    <path>/sz0099/ood/article/parag/deleteImageById</path>
+	    <path>/sz0099/ood/article/parag/addImageById</path>
+	    <path>/sz0099/ood/article/parag/changeImageById</path>
+	    <path>/sz0099/ood/article/parag/mergeRefForOrder</path>
+	    <path>/sz0099/ood/article/manage/detailPreview*</path>
+	    <path>/sz0099/ood/article/manage/merge/title/ansy</path>
+	    <path>/sz0099/ood/article/manage/merge/description/ansy</path>
+	    
+	    <path>/sz0099/ood/article/cover/create</path>
+	    <path>/sz0099/ood/article/cover/delete</path>
+	    <path>/sz0099/ood/article/cover/mergeRefForDescription</path>
+	    <path>/sz0099/ood/article/cover/deleteImageById</path>
+	    <path>/sz0099/ood/article/cover/addImageById</path>
+	    <path>/sz0099/ood/article/cover/changeImageById</path>
+	    <path>/sz0099/ood/article/cover/mergeRefForOrder</path>
+	    
+	    <path>/sz0099/ood/article/banner/create</path>
+	    <path>/sz0099/ood/article/banner/delete</path>
+	    <path>/sz0099/ood/article/banner/mergeRefForDescription</path>
+	    <path>/sz0099/ood/article/banner/deleteImageById</path>
+	    <path>/sz0099/ood/article/banner/addImageById</path>
+	    <path>/sz0099/ood/article/banner/changeImageById</path>
+	    <path>/sz0099/ood/article/banner/mergeRefForOrder</path>
+	    
+	    
+	    
+	    <path>/sz0099/ood/activity/buyInstruction</path>
+	    <path>/sz0099/ood/activity/preOrder</path>
+	    <path>/sz0099/ood/activity/order/confirm</path>
+	    <path>/sz0099/ood/activity/order/confirmOrder</path>
+	    <path>/sz0099/ood/activity/order/manage/confirmOrder</path>
+	    <path>/sz0099/ood/activity/order/manage/cancelOrder</path>
+	    <path>/sz0099/ood/activity/order/manage/closeOrder</path>
+	    <path>/sz0099/ood/activity/order/queryPullCode</path>
+	    <path>/sz0099/ood/activity/order/modifyEmail</path>
+	    <path>/sz0099/ood/activity/order/doModifyEmail</path>
+	    <path>/sz0099/ood/activity/order/manage/mergeForInprocess</path>
+	    <path>/sz0099/ood/activity/order/manage/mergeForSent</path>
+	    <path>/sz0099/ood/activity/order/user/manage/add</path>
+	    <path>/sz0099/ood/activity/order/user/manage/delete</path>
+	    <path>/sz0099/ood/activity/order/user/manage/merge*</path>
+	    <path>/sz0099/ood/activity/order/doOrderquery*</path>
+	    
+	    <path>/sz0099/ood/activity/manage/merge/*</path>
+	    <path>/sz0099/ood/activity/manage/paragraph/*</path>
+	    <path>/sz0099/ood/activity/manage/tag/*</path>
+	    <path>/sz0099/ood/activity/manage/queryDraftList/ansy*</path>
+	    <path>/sz0099/ood/activity/manage/queryActivityManageList/ansy*</path>
+	    <path>/sz0099/ood/activity/manage/queryActivityList/ansy*</path>
+	    <path>/sz0099/ood/activity/manage/searchActivityList/ansy*</path>
+	    
+	    <path>/sz0099/ood/activity/personal/myinfo/*</path>
+	    <path>/sz0099/ood/activity/praise*</path>
+	    <path>/sz0099/ood/activity/doPraise*</path>
+	    <path>/sz0099/ood/activity/refreshPraise*</path>
+	    <path>/sz0099/ood/activity/favirate*</path>
+	    <path>/sz0099/ood/activity/findRelative*</path>
+	    <path>/sz0099/ood/activity/parag/create</path>
+	    <path>/sz0099/ood/activity/parag/delete</path>
+	    <path>/sz0099/ood/activity/parag/mergeRefForDescription</path>
+	    <path>/sz0099/ood/activity/parag/deleteImageById</path>
+	    <path>/sz0099/ood/activity/parag/addImageById</path>
+	    <path>/sz0099/ood/activity/parag/changeImageById</path>
+	    <path>/sz0099/ood/activity/parag/mergeRefForOrder</path>
+	    <path>/sz0099/ood/activity/parag/mergeTemplateById</path>
+	    <path>/sz0099/ood/activity/manage/paragraph/resetOrderSeq</path>
+	    
+	    <path>/sz0099/ood/activity/manage/detailPreview*</path>
+	    <path>/sz0099/ood/activity/manage/merge/title/ansy</path>
+	    <path>/sz0099/ood/activity/manage/merge/description/ansy</path>
+	    <path>/sz0099/ood/activity/time/manage/merge*</path>
+	    <path>/sz0099/ood/activity/joinItem/manage/merge*</path>
+	    <path>/sz0099/ood/activity/joinItem/manage/add*</path>
+	    <path>/sz0099/ood/activity/joinItem/manage/delete*</path>
+	    <path>/sz0099/ood/activity/fee/manage/merge*</path>
+	    <path>/sz0099/ood/activity/findTemplate/ansy*</path>
+	    <path>/sz0099/ood/activity/findPageForTemplate/ansy*</path>
+	    <path>/sz0099/ood/activity/manage/loadTemplate*</path>
+	    
+	    <path>/sz0099/ood/activity/cover/create</path>
+	    <path>/sz0099/ood/activity/cover/delete</path>
+	    <path>/sz0099/ood/activity/cover/mergeRefForDescription</path>
+	    <path>/sz0099/ood/activity/cover/deleteImageById</path>
+	    <path>/sz0099/ood/activity/cover/addImageById</path>
+	    <path>/sz0099/ood/activity/cover/changeImageById</path>
+	    <path>/sz0099/ood/activity/cover/mergeRefForOrder</path>
+	    
+	    <path>/sz0099/ood/activity/banner/create</path>
+	    <path>/sz0099/ood/activity/banner/delete</path>
+	    <path>/sz0099/ood/activity/banner/mergeRefForDescription</path>
+	    <path>/sz0099/ood/activity/banner/deleteImageById</path>
+	    <path>/sz0099/ood/activity/banner/addImageById</path>
+	    <path>/sz0099/ood/activity/banner/changeImageById</path>
+	    <path>/sz0099/ood/activity/banner/mergeRefForOrder</path>
+	    
+	    <path>/sz0099/ood/home/fetch*</path>
+	    
+	    <path>/sz0099/ood/home/article/index/recommend/ansy</path>
+	    <path>/sz0099/ood/home/article/index/recommend/more/ansy</path>
+	    <path>/sz0099/ood/home/article/index/flag/ansy</path>
+	    <path>/sz0099/ood/home/article/index/flag/more/ansy</path>
+	    <path>/sz0099/ood/home/article/index/foot/ansy</path>
+	    <path>/sz0099/ood/home/article/index/foot/more/ansy</path>
+	    <path>/sz0099/ood/home/article/index/travel/ansy</path>
+	    <path>/sz0099/ood/home/article/index/travel/more/ansy</path>
+	    <path>/sz0099/ood/home/article/index/bike/ansy</path>
+	    <path>/sz0099/ood/home/article/index/bike/more/ansy</path>
+	    <path>/sz0099/ood/home/article/index/roadline/ansy</path>
+	    <path>/sz0099/ood/home/article/index/roadline/more/ansy</path>
+	    <path>/sz0099/ood/home/article/index/equip/ansy</path>
+	    <path>/sz0099/ood/home/article/index/equip/more/ansy</path>
+	    <path>/sz0099/ood/home/article/index/welfare/ansy</path>
+	    <path>/sz0099/ood/home/article/index/welfare/more/ansy</path>
+	    <path>/sz0099/ood/home/article/index/eat/ansy</path>
+	    <path>/sz0099/ood/home/article/index/eat/more/ansy</path>
+	    
+	    <path>/sz0099/ood/home/article/index/all/more/ansy</path>
+	    <path>/sz0099/ood/home/article/index/all/ansy</path>
+	    
+	    <path>/sz0099/ood/home/profession/index/recommend/ansy</path>
+	    <path>/sz0099/ood/home/profession/index/recommend/more/ansy</path>
+	    <path>/sz0099/ood/home/profession/index/major/ansy</path>
+	    <path>/sz0099/ood/home/profession/index/major/more/ansy</path>
+	    <path>/sz0099/ood/home/profession/index/outdoor/ansy</path>
+	    <path>/sz0099/ood/home/profession/index/outdoor/more/ansy</path>
+	    <path>/sz0099/ood/home/profession/index/life/ansy</path>
+	    <path>/sz0099/ood/home/profession/index/life/more/ansy</path>
+	    <path>/sz0099/ood/home/profession/index/ingenuity/ansy</path>
+	    <path>/sz0099/ood/home/profession/index/ingenuity/more/ansy</path>
+	    <path>/sz0099/ood/home/profession/index/relax/ansy</path>
+	    <path>/sz0099/ood/home/profession/index/relax/more/ansy</path>
+	    <path>/sz0099/ood/home/profession/index/native/ansy</path>
+	    <path>/sz0099/ood/home/profession/index/native/more/ansy</path>
+	    <path>/sz0099/ood/home/profession/index/equip/ansy</path>
+	    <path>/sz0099/ood/home/profession/index/equip/more/ansy</path>
+	    <path>/sz0099/ood/home/profession/index/factory/ansy</path>
+	    <path>/sz0099/ood/home/profession/index/factory/more/ansy</path>
+	    
+	    
+	    <path>/sz0099/ood/home/activity/index/recommend/ansy</path>
+	    <path>/sz0099/ood/home/activity/index/recommend/more/ansy</path>
+	    <path>/sz0099/ood/home/activity/index/flag/ansy</path>
+	    <path>/sz0099/ood/home/activity/index/flag/more/ansy</path>
+	    <path>/sz0099/ood/home/activity/index/foot/ansy</path>
+	    <path>/sz0099/ood/home/activity/index/foot/more/ansy</path>
+	    <path>/sz0099/ood/home/activity/index/travel/ansy</path>
+	    <path>/sz0099/ood/home/activity/index/travel/more/ansy</path>
+	    <path>/sz0099/ood/home/activity/index/bike/ansy</path>
+	    <path>/sz0099/ood/home/activity/index/bike/more/ansy</path>
+	    
+	    <path>/sz0099/ood/home/activity/index/car/ansy</path>
+	    <path>/sz0099/ood/home/activity/index/car/more/ansy</path>
+	    
+	    <path>/sz0099/ood/home/activity/index/free/ansy</path>
+	    <path>/sz0099/ood/home/activity/index/free/more/ansy</path>
+	    
+	    <path>/sz0099/ood/home/activity/index/eat/ansy</path>
+	    <path>/sz0099/ood/home/activity/index/eat/more/ansy</path>
+	    
+	    <path>/sz0099/ood/home/activity/index/pick/ansy</path>
+	    <path>/sz0099/ood/home/activity/index/pick/more/ansy</path>
+	    
+	    <path>/sz0099/ood/home/activity/index/volunteer/ansy</path>
+	    <path>/sz0099/ood/home/activity/index/volunteer/more/ansy</path>
+	    
+	    <path>/sz0099/ood/home/activity/index/roadline/ansy</path>
+	    <path>/sz0099/ood/home/activity/index/roadline/more/ansy</path>
+	    <path>/sz0099/ood/home/activity/index/equip/ansy</path>
+	    <path>/sz0099/ood/home/activity/index/equip/more/ansy</path>
+	    <path>/sz0099/ood/home/activity/index/welfare/ansy</path>
+	    <path>/sz0099/ood/home/activity/index/welfare/more/ansy</path>
+	    
+	    <path>/sz0099/ood/home/activity/index/all/more/ansy</path>
+	    <path>/sz0099/ood/home/activity/index/all/ansy</path>
+ 	</mapping>
+ 	
+	<mapping>
+	    <path>/sys/loginUI</path>
+	    <path>/sys/doLogin</path>
+	    <path>/user/loginUI</path>
+	    <path>/user/doLogin</path>
+	    <path>/loginUI</path>
+	    <path>/findpwdUI*</path>
+	    <decorator>/decorators/common/default/classic/html_container.ftl</decorator>
+	    <decorator>/decorators/common/default/layout_classic3.ftl</decorator>
+ 	</mapping>
+ 	<mapping exclude="true">
+	    <path>/loginOnlyUI</path>
+	    <path>/sys/login</path>
+	    <path>/auth/user/manage/changePwdUI</path>
+	    <path>/auth/user/manage/doChangePwd</path>
+ 	</mapping>
+ 	
+ 	<mapping>
+	    <path>/registerUI</path>
+	    <decorator>/decorators/common/default/classic/html_container.ftl</decorator>
+	    <decorator>/decorators/common/default/layout_classic3.ftl</decorator>
+ 	</mapping>
+ 	
+ 	<mapping>
+	    <path>/loginUI2</path>
+	    <decorator>/decorators/common/default/classic/html_container.ftl</decorator>
+	    <decorator>/decorators/common/default/layout_classic3.ftl</decorator>
+ 	</mapping>
+ 	
+ 	<mapping>
+	    <path>/activity/*</path>
+	    <decorator>/decorators/common/default/classic/html_container.ftl</decorator>
+	    <decorator>/decorators/common/default/layout_classic3.ftl</decorator>
+ 	</mapping>
+ 	
+ 	<!-- article begin -->
+ 	<mapping>
+	    <path>/activity/article/view/single*</path>
+	    <decorator>/decorators/common/default/classic/html_container.ftl</decorator>
+	    <decorator>/decorators/common/default/layout_classic3.ftl</decorator>
+ 	</mapping>
+ 	<!-- article end -->
+ 	
+ 	
+ 	<mapping>
+	    <path>/social/*</path>
+	    <decorator>/decorators/common/default/classic/html_container.ftl</decorator>
+	    <decorator>/decorators/common/default/layout_classic3.ftl</decorator>
+ 	</mapping>
+ 	
+ 	<mapping>
+	    <path>/site/*</path>
+	    <decorator>/decorators/common/default/classic/html_container.ftl</decorator>
+	    <decorator>/decorators/common/default/layout_classic3.ftl</decorator>
+ 	</mapping>
+ 	
+</sitemesh>

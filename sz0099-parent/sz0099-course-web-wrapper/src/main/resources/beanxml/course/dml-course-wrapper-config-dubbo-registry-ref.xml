@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+                        http://www.springframework.org/schema/beans/spring-beans-3.1.xsd    
+                        http://www.springframework.org/schema/context
+                        http://www.springframework.org/schema/context/spring-context-3.1.xsd
+                        http://code.alibabatech.com/schema/dubbo
+                        http://code.alibabatech.com/schema/dubbo/dubbo.xsd  ">
+
+	<!-- module course begin -->
+	<dubbo:reference id="coeProductDelegate" interface="dml.sz0099.course.app.biz.delegate.product.CoeProductDelegate" timeout="1200000" check="false" />
+	<dubbo:reference id="coeProductTagDelegate" interface="dml.sz0099.course.app.biz.delegate.product.CoeProductTagDelegate" timeout="1200000" check="false" />
+	<dubbo:reference id="coeTagDelegate" interface="dml.sz0099.course.app.biz.delegate.tag.CoeTagDelegate" timeout="1200000" check="false" />
+	<dubbo:reference id="courseProductDelegate" interface="dml.sz0099.course.app.biz.delegate.product.CourseProductDelegate" timeout="1200000" check="false" />
+	<dubbo:reference id="coeGradeDelegate" interface="dml.sz0099.course.app.biz.delegate.product.CoeGradeDelegate" timeout="1200000" check="false" />
+	<dubbo:reference id="coeOprationDelegate" interface="dml.sz0099.course.app.biz.delegate.product.CoeOprationDelegate" timeout="1200000" check="false" />
+	<dubbo:reference id="coeProductLogDelegate" interface="dml.sz0099.course.app.biz.delegate.product.CoeProductLogDelegate" timeout="1200000" check="false" />
+	<dubbo:reference id="coeCategProdDelegate" interface="dml.sz0099.course.app.biz.delegate.product.CoeCategProdDelegate" timeout="1200000" check="false" />
+
+	<dubbo:reference id="coeUserGradeLogDelegate" interface="dml.sz0099.course.app.biz.delegate.user.CoeUserGradeLogDelegate" timeout="1200000" check="false" />
+	<dubbo:reference id="coeUserGradeDelegate" interface="dml.sz0099.course.app.biz.delegate.user.CoeUserGradeDelegate" timeout="1200000" check="false" />
+	<dubbo:reference id="coeUserDelegate" interface="dml.sz0099.course.app.biz.delegate.user.CoeUserDelegate" timeout="1200000" check="false" />
+	<dubbo:reference id="coeUserImageDelegate" interface="dml.sz0099.course.app.biz.delegate.user.CoeUserImageDelegate" timeout="1200000" check="false" />
+	<dubbo:reference id="coeUserTagDelegate" interface="dml.sz0099.course.app.biz.delegate.user.CoeUserTagDelegate" timeout="1200000" check="false" />
+	<dubbo:reference id="coeUserBindDelegate" interface="dml.sz0099.course.app.biz.delegate.user.CoeUserBindDelegate" timeout="1200000" check="false" />
+	<dubbo:reference id="coeUserVerifyDelegate" interface="dml.sz0099.course.app.biz.delegate.user.CoeUserVerifyDelegate" timeout="1200000" check="false" />
+	<dubbo:reference id="saywordDelegate" interface="dml.sz0099.course.app.biz.delegate.user.SaywordDelegate" timeout="1200000" check="false" />
+
+	<dubbo:reference id="coeOrderDelegate" interface="dml.sz0099.course.app.biz.delegate.order.CoeOrderDelegate" timeout="1200000" check="false" />
+	<dubbo:reference id="coeOrderProdLogDelegate" interface="dml.sz0099.course.app.biz.delegate.order.CoeOrderProdLogDelegate" timeout="1200000" check="false" />
+	<dubbo:reference id="coeOrderAsignDelegate" interface="dml.sz0099.course.app.biz.delegate.order.CoeOrderAsignDelegate" timeout="1200000" check="false" />
+	<dubbo:reference id="coeOrderExpressDelegate" interface="dml.sz0099.course.app.biz.delegate.order.CoeOrderExpressDelegate" timeout="1200000" check="false" />
+	<dubbo:reference id="coeOrderProductDelegate" interface="dml.sz0099.course.app.biz.delegate.order.CoeOrderProductDelegate" timeout="1200000" check="false" />
+	<dubbo:reference id="coeOrderTransferDelegate" interface="dml.sz0099.course.app.biz.delegate.order.CoeOrderTransferDelegate" timeout="1200000" check="false" />
+	<dubbo:reference id="coeOrderTransferLogDelegate" interface="dml.sz0099.course.app.biz.delegate.order.CoeOrderTransferLogDelegate" timeout="1200000" check="false" />
+
+
+
+	<dubbo:reference id="categoryDelegate" interface="dml.sz0099.course.app.biz.delegate.category.CategoryDelegate" timeout="1200000" check="false" />
+	<dubbo:reference id="categoryExtendDelegate" interface="dml.sz0099.course.app.biz.delegate.category.CategoryExtendDelegate" timeout="1200000" check="false" />
+	<dubbo:reference id="categoryRefDelegate" interface="dml.sz0099.course.app.biz.delegate.category.CategoryRefDelegate" timeout="1200000" check="false" />
+	<dubbo:reference id="categoryExtendLogDelegate" interface="dml.sz0099.course.app.biz.delegate.category.CategoryExtendLogDelegate" timeout="1200000" check="false" />
+	<dubbo:reference id="categoryExtendContentDelegate" interface="dml.sz0099.course.app.biz.delegate.category.CategoryExtendContentDelegate" timeout="1200000" check="false" />
+	
+
+
+	<dubbo:reference id="paragProductDelegate" interface="dml.sz0099.course.app.biz.delegate.paragraph.ParagProductDelegate" timeout="1200000" check="false" />
+	<dubbo:reference id="paragraphDelegate" interface="dml.sz0099.course.app.biz.delegate.paragraph.ParagraphDelegate" timeout="1200000" check="false" />
+	<dubbo:reference id="photoDelegate" interface="dml.sz0099.course.app.biz.delegate.paragraph.PhotoDelegate" timeout="1200000" check="false" />
+	<dubbo:reference id="photoParagDelegate" interface="dml.sz0099.course.app.biz.delegate.paragraph.PhotoParagDelegate" timeout="1200000" check="false" />
+	<dubbo:reference id="photoCoverDelegate" interface="dml.sz0099.course.app.biz.delegate.paragraph.PhotoCoverDelegate" timeout="1200000" check="false" />
+	<dubbo:reference id="photoBannerDelegate" interface="dml.sz0099.course.app.biz.delegate.paragraph.PhotoBannerDelegate" timeout="1200000" check="false" />
+
+	<dubbo:reference id="profParagProfessionDelegate" interface="dml.sz0099.course.app.biz.delegate.profession.ParagProfessionDelegate" timeout="1200000" check="false" />
+	<dubbo:reference id="profParagraphDelegate" interface="dml.sz0099.course.app.biz.delegate.profession.ProfParagraphDelegate" timeout="1200000" check="false" />
+	<dubbo:reference id="profPhotoDelegate" interface="dml.sz0099.course.app.biz.delegate.profession.ProfPhotoDelegate" timeout="1200000" check="false" />
+	<dubbo:reference id="profPhotoParagDelegate" interface="dml.sz0099.course.app.biz.delegate.profession.ProfPhotoParagDelegate" timeout="1200000" check="false" />
+	<dubbo:reference id="profPhotoCoverDelegate" interface="dml.sz0099.course.app.biz.delegate.profession.ProfPhotoCoverDelegate" timeout="1200000" check="false" />
+	<dubbo:reference id="profPhotoBannerDelegate" interface="dml.sz0099.course.app.biz.delegate.profession.ProfPhotoBannerDelegate" timeout="1200000" check="false" />
+	<dubbo:reference id="professionDelegate" interface="dml.sz0099.course.app.biz.delegate.profession.ProfessionDelegate" timeout="1200000" check="false" />
+	<dubbo:reference id="professionTagDelegate" interface="dml.sz0099.course.app.biz.delegate.profession.ProfessionTagDelegate" timeout="1200000" check="false" />
+	<dubbo:reference id="professionPositionDelegate" interface="dml.sz0099.course.app.biz.delegate.profession.ProfessionPositionDelegate" timeout="1200000" check="false" />
+	<dubbo:reference id="categProfessionDelegate" interface="dml.sz0099.course.app.biz.delegate.profession.CategProfessionDelegate" timeout="1200000" check="false" />
+	
+	<dubbo:reference id="professionExtendDelegate" interface="dml.sz0099.course.app.biz.delegate.profession.ProfessionExtendDelegate" timeout="1200000" check="false" />
+	<dubbo:reference id="professionExtendLogDelegate" interface="dml.sz0099.course.app.biz.delegate.profession.ProfessionExtendLogDelegate" timeout="1200000" check="false" />
+	<dubbo:reference id="professionExtendContentDelegate" interface="dml.sz0099.course.app.biz.delegate.profession.ProfessionExtendContentDelegate" timeout="1200000" check="false" />
+	<dubbo:reference id="professionImageDelegate" interface="dml.sz0099.course.app.biz.delegate.profession.ProfessionImageDelegate" timeout="1200000" check="false" />
+	<dubbo:reference id="professionRefDelegate" interface="dml.sz0099.course.app.biz.delegate.profession.ProfessionRefDelegate" timeout="1200000" check="false" />
+	<dubbo:reference id="professionPraiseDelegate" interface="dml.sz0099.course.app.biz.delegate.profession.ProfessionPraiseDelegate" timeout="1200000" check="false" />
+	<dubbo:reference id="professionFavirateDelegate" interface="dml.sz0099.course.app.biz.delegate.profession.ProfessionFavirateDelegate" timeout="1200000" check="false" />
+	
+
+	<dubbo:reference id="articleParagraphDelegate" interface="dml.sz0099.course.app.biz.delegate.article.ArticleParagraphDelegate" timeout="1200000" check="false" />
+	<dubbo:reference id="articlePhotoBannerDelegate" interface="dml.sz0099.course.app.biz.delegate.article.ArticlePhotoBannerDelegate" timeout="1200000" check="false" />
+	<dubbo:reference id="articlePhotoCoverDelegate" interface="dml.sz0099.course.app.biz.delegate.article.ArticlePhotoCoverDelegate" timeout="1200000" check="false" />
+	<dubbo:reference id="articlePhotoDelegate" interface="dml.sz0099.course.app.biz.delegate.article.ArticlePhotoDelegate" timeout="1200000" check="false" />
+	<dubbo:reference id="articlePhotoParagDelegate" interface="dml.sz0099.course.app.biz.delegate.article.ArticlePhotoParagDelegate" timeout="1200000" check="false" />
+	<dubbo:reference id="coeArticleDelegate" interface="dml.sz0099.course.app.biz.delegate.article.CoeArticleDelegate" timeout="1200000" check="false" />
+	<dubbo:reference id="coeArticleTagDelegate" interface="dml.sz0099.course.app.biz.delegate.article.CoeArticleTagDelegate" timeout="1200000" check="false" />
+	<dubbo:reference id="paragArticleDelegate" interface="dml.sz0099.course.app.biz.delegate.article.ParagArticleDelegate" timeout="1200000" check="false" />
+	<dubbo:reference id="coeCategArticleDelegate" interface="dml.sz0099.course.app.biz.delegate.article.CoeCategArticleDelegate" timeout="1200000" check="false" />
+	<dubbo:reference id="coeArticlePraiseDelegate" interface="dml.sz0099.course.app.biz.delegate.article.CoeArticlePraiseDelegate" timeout="1200000" check="false" />
+	<dubbo:reference id="coeArticleFavirateDelegate" interface="dml.sz0099.course.app.biz.delegate.article.CoeArticleFavirateDelegate" timeout="1200000" check="false" />
+	<dubbo:reference id="coeArticlePositionDelegate" interface="dml.sz0099.course.app.biz.delegate.article.CoeArticlePositionDelegate" timeout="1200000" check="false" />
+
+
+	<dubbo:reference id="activityParagraphDelegate" interface="dml.sz0099.course.app.biz.delegate.activity.ActivityParagraphDelegate" timeout="1200000" check="false" />
+	<dubbo:reference id="activityPhotoBannerDelegate" interface="dml.sz0099.course.app.biz.delegate.activity.ActivityPhotoBannerDelegate" timeout="1200000" check="false" />
+	<dubbo:reference id="activityPhotoCoverDelegate" interface="dml.sz0099.course.app.biz.delegate.activity.ActivityPhotoCoverDelegate" timeout="1200000" check="false" />
+	<dubbo:reference id="activityPhotoDelegate" interface="dml.sz0099.course.app.biz.delegate.activity.ActivityPhotoDelegate" timeout="1200000" check="false" />
+	<dubbo:reference id="activityPhotoParagDelegate" interface="dml.sz0099.course.app.biz.delegate.activity.ActivityPhotoParagDelegate" timeout="1200000" check="false" />
+	<dubbo:reference id="coeActivityDelegate" interface="dml.sz0099.course.app.biz.delegate.activity.CoeActivityDelegate" timeout="1200000" check="false" />
+	<dubbo:reference id="coeActivityTagDelegate" interface="dml.sz0099.course.app.biz.delegate.activity.CoeActivityTagDelegate" timeout="1200000" check="false" />
+	<dubbo:reference id="paragActivityDelegate" interface="dml.sz0099.course.app.biz.delegate.activity.ParagActivityDelegate" timeout="1200000" check="false" />
+	<dubbo:reference id="coeCategActivityDelegate" interface="dml.sz0099.course.app.biz.delegate.activity.CoeCategActivityDelegate" timeout="1200000" check="false" />
+	<dubbo:reference id="coeActivityPraiseDelegate" interface="dml.sz0099.course.app.biz.delegate.activity.CoeActivityPraiseDelegate" timeout="1200000" check="false" />
+	<dubbo:reference id="coeActivityFavirateDelegate" interface="dml.sz0099.course.app.biz.delegate.activity.CoeActivityFavirateDelegate" timeout="1200000" check="false" />
+	<dubbo:reference id="coeActivityPositionDelegate" interface="dml.sz0099.course.app.biz.delegate.activity.CoeActivityPositionDelegate" timeout="1200000" check="false" />
+	<dubbo:reference id="coeActivityTimeDelegate" interface="dml.sz0099.course.app.biz.delegate.activity.CoeActivityTimeDelegate" timeout="1200000" check="false" />
+	<dubbo:reference id="coeActivityFeeDelegate" interface="dml.sz0099.course.app.biz.delegate.activity.CoeActivityFeeDelegate" timeout="1200000" check="false" />
+	<dubbo:reference id="joinItemDelegate" interface="dml.sz0099.course.app.biz.delegate.activity.JoinItemDelegate" timeout="1200000" check="false" />
+	<dubbo:reference id="coeActivityOrderDelegate" interface="dml.sz0099.course.app.biz.delegate.activity.CoeActivityOrderDelegate" timeout="1200000" check="false" />
+	<dubbo:reference id="coeActivityUserDelegate" interface="dml.sz0099.course.app.biz.delegate.activity.CoeActivityUserDelegate" timeout="1200000" check="false" />
+	<dubbo:reference id="coeActivityOrderLogDelegate" interface="dml.sz0099.course.app.biz.delegate.activity.CoeActivityOrderLogDelegate" timeout="1200000" check="false" />
+	
+
+
+	<dubbo:reference id="imagebaseDelegate" interface="dml.sz0099.course.app.biz.delegate.media.ImagebaseDelegate" timeout="1200000" check="false" />
+	<dubbo:reference id="imageExtendDelegate" interface="dml.sz0099.course.app.biz.delegate.media.ImageExtendDelegate" timeout="1200000" check="false" />
+	<dubbo:reference id="imageRefDelegate" interface="dml.sz0099.course.app.biz.delegate.media.ImageRefDelegate" timeout="1200000" check="false" />
+	<dubbo:reference id="imageExtendLogDelegate" interface="dml.sz0099.course.app.biz.delegate.media.ImageExtendLogDelegate" timeout="1200000" check="false" />
+	<dubbo:reference id="imageExtendContentDelegate" interface="dml.sz0099.course.app.biz.delegate.media.ImageExtendContentDelegate" timeout="1200000" check="false" />
+	
+	
+	<dubbo:reference id="positionDelegate" interface="dml.sz0099.course.app.biz.delegate.position.PositionDelegate" timeout="1200000" check="false" />
+	<dubbo:reference id="positionImageDelegate" interface="dml.sz0099.course.app.biz.delegate.position.PositionImageDelegate" timeout="1200000" check="false" />
+	<dubbo:reference id="positionRefDelegate" interface="dml.sz0099.course.app.biz.delegate.position.PositionRefDelegate" timeout="1200000" check="false" />
+	<dubbo:reference id="positionExtendDelegate" interface="dml.sz0099.course.app.biz.delegate.position.PositionExtendDelegate" timeout="1200000" check="false" />
+	<dubbo:reference id="positionExtendLogDelegate" interface="dml.sz0099.course.app.biz.delegate.position.PositionExtendLogDelegate" timeout="1200000" check="false" />
+	<dubbo:reference id="positionExtendContentDelegate" interface="dml.sz0099.course.app.biz.delegate.position.PositionExtendContentDelegate" timeout="1200000" check="false" />
+
+	<!-- module course end -->
+</beans>

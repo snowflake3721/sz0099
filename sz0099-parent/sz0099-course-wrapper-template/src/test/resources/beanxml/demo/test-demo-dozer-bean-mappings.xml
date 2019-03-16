@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://dozer.sourceforge.net
+          http://dozer.sourceforge.net/schema/beanmapping.xsd">
+
+	<configuration>
+		<stop-on-errors>true</stop-on-errors>
+		<date-format>yyyy-MM-dd HH:mm:ss</date-format>
+		<wildcard>true</wildcard>
+	</configuration>
+
+	<mapping map-id="demoMapper_1">
+		<class-a>org.jit4j.app.code.persist.entity.template.Demo</class-a>
+		<class-b>org.jit4j.app.code.persist.entity.template.bo.DemoBo</class-b>
+		<field>
+			<a>name</a>
+			<b>code</b>
+		</field>
+		<field>
+			<a>code</a>
+			<b>name</b>
+		</field>
+	</mapping>
+
+</mappings>  

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                        http://www.springframework.org/schema/beans/spring-beans-4.0.xsd    
+                        http://www.springframework.org/schema/context    
+                        http://www.springframework.org/schema/context/spring-context-4.0.xsd    
+                        http://www.springframework.org/schema/mvc    
+                        http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+	
+	<import resource="classpath*:web/dml-web-config-spring-property.xml"/>
+    <import resource="classpath*:com/dromala/client/wrapper/dml-wrapper-spring-integrate.xml" />
+	<import resource="classpath*:web/dml-course-web-config-spring-mvc.xml"/>
+    <import resource="classpath*:web/web-config-spring-shiro.xml"/>
+    <import resource="classpath*:beanxml/web-config-spring-beans.xml"/>
+    <import resource="classpath*:beanxml/web-config-spring-beans-app.xml"/>
+    
+    <import resource="classpath*:beanxml/dml-course-web-config-spring-beans-app.xml"/>
+</beans>

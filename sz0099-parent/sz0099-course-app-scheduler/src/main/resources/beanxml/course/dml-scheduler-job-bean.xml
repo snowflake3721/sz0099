@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans-4.2.xsd">
+
+	<!-- 定时任务开发步骤：1.定义jobBean   2.注释功能说明      3.插入记录schedule_job -->
+	<!-- 
+	     jobBean开发步骤：
+				参见示例：org.jit4j.core.scheduler.job.define.IntegralSyncJob 
+	 -->
+	
+    <!--++++++++++++++++++++ 积分同步Job begin +++++++++++++++++++++++++++++++-->
+	<!-- 积分同步bean, 用于将不同模块的积分数据同步至积分系统中 -->
+    <bean id="integralSyncJob2" class="org.jit8j.core.scheduler.job.define.IntegralSyncJob"></bean>
+    <bean id="oodJob" class="dml.sz0099.course.app.scheduler.job.define.OodSchedulerJob"></bean>
+    <!--++++++++++++++++++++ 积分同步Job end +++++++++++++++++++++++++++++++-->
+    
+	
+</beans>

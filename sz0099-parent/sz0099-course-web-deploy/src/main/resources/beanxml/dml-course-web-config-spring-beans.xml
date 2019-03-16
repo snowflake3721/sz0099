@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                        http://www.springframework.org/schema/beans/spring-beans-4.0.xsd    
+                        http://www.springframework.org/schema/context    
+                        http://www.springframework.org/schema/context/spring-context-4.0.xsd    
+                        http://www.springframework.org/schema/mvc    
+                        http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+	<!-- <bean id="requestContextPropertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:config-webapp.properties</value>
+			</list>
+		</property>
+	</bean> -->
+
+	<!-- 资源分类注入 -->
+    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="staticMethod" value="org.jit4j.core.webmvc.protocal.http.RequestContext.setAppDomain"/>
+        <property name="arguments" value="${jit4j.mvc.web.basic.appDomain}"/>
+    </bean>
+    
+    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="staticMethod" value="org.jit4j.core.webmvc.protocal.http.RequestContext.setStaticDomain"/>
+        <property name="arguments" value="${jit4j.mvc.web.basic.staticDomain}"/>
+    </bean>
+    
+    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="staticMethod" value="org.jit4j.core.webmvc.protocal.http.RequestContext.setImageDomain"/>
+        <property name="arguments" value="${jit4j.mvc.web.basic.imageDomain}"/>
+    </bean>
+    
+    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="staticMethod" value="org.jit4j.core.webmvc.protocal.http.RequestContext.setMobileDomain"/>
+        <property name="arguments" value="${jit4j.mvc.web.basic.mobileDomain}"/>
+    </bean>
+    
+    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="staticMethod" value="org.jit4j.core.webmvc.protocal.http.RequestContext.setBasePath"/>
+        <property name="arguments" value="${jit4j.mvc.web.basic.basePath}"/>
+    </bean>
+    
+    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="staticMethod" value="org.jit4j.core.webmvc.protocal.http.RequestContext.setWebPath"/>
+        <property name="arguments" value="${jit4j.mvc.web.basic.webPath}"/>
+    </bean>
+    
+    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="staticMethod" value="org.jit4j.core.webmvc.protocal.http.RequestContext.setMobilePath"/>
+        <property name="arguments" value="${jit4j.mvc.web.basic.mobilePath}"/>
+    </bean>
+    
+    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="staticMethod" value="org.jit4j.core.webmvc.protocal.http.RequestContext.setAssertPath"/>
+        <property name="arguments" value="${jit4j.mvc.web.basic.assertPath}"/>
+    </bean>
+    <!-- 资源分类注入 -->
+    
+    
+</beans>

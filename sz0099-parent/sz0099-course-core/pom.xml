@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>dml.sz0099.course</groupId>
+		<artifactId>sz0099-course-parent</artifactId>
+		<version>1.0.0.0-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>sz0099-course-core</artifactId>
+	<name>sz0099-course-core</name>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>dml.sz0099.course</groupId>
+			<artifactId>sz0099-course-domain</artifactId>
+			<version>${sz0099.course.version}</version>
+		</dependency>
+
+		<!-- <dependency>
+			<groupId>org.jit8j.core</groupId>
+			<artifactId>jit8j-core-persist</artifactId>
+			<version>${jit8j.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jit8j.core</groupId>
+			<artifactId>jit8j-core-biz</artifactId>
+			<version>${jit8j.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jit8j.core</groupId>
+			<artifactId>jit8j-core-pipe</artifactId>
+			<version>${jit8j.version}</version>
+		</dependency> -->
+
+	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				
+			</plugin>
+			
+			<plugin>  
+                <!-- https://mvnrepository.com/artifact/org.mybatis.generator/mybatis-generator-maven-plugin -->
+			    <groupId>org.mybatis.generator</groupId>
+			    <artifactId>mybatis-generator-maven-plugin</artifactId>
+			    <version>1.3.5</version>
+
+                <configuration>  
+                    <configurationFile>src/main/resources/beanxml/course/course-mybatis-generator.xml</configurationFile>  
+                    <overwrite>true</overwrite>  
+                </configuration>  
+                <dependencies>  
+                    <dependency>  
+                        <groupId>mysql</groupId>
+						<artifactId>mysql-connector-java</artifactId>
+						<version>${mysql.drivers.version}</version>
+                    </dependency>  
+                </dependencies>  
+            </plugin>
+		</plugins>
+	</build>
+</project>

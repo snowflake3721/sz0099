@@ -1,0 +1,122 @@
+1.初始化角色数据,RoleServiceTest.testInitDataForPlatRoleList
+2.初始化nickname,NicknameServiceTest.testInitData
+3.初始化等级数据,CoeGradeServiceTest.testInitData
+初始化Extend配置数据
+4.启动服务
+5.配置以下bean:
+ <bean id="paragraphAdaptor" class="dml.sz0099.course.app.client.resolver.adaptor.media.ParagraphAdaptor"></bean>
+    <bean id="personalSingleAdaptor" class="dml.sz0099.course.app.client.resolver.adaptor.media.PersonalSingleAdaptor"></bean>
+    <bean id="paragProfessionAdaptor" class="dml.sz0099.course.app.client.resolver.adaptor.media.ParagProfessionAdaptor"></bean>
+    <bean id="coverAdaptor" class="dml.sz0099.course.app.client.resolver.adaptor.media.CoverAdaptor"></bean>
+    <bean id="coverProfessionAdaptor" class="dml.sz0099.course.app.client.resolver.adaptor.media.CoverProfessionAdaptor"></bean>
+    <bean id="bannerAdaptor" class="dml.sz0099.course.app.client.resolver.adaptor.media.BannerAdaptor"></bean>
+    <bean id="bannerProfessionAdaptor" class="dml.sz0099.course.app.client.resolver.adaptor.media.BannerProfessionAdaptor"></bean>
+
+方法：在以下方位上传一张图片，以生成ImageExtend.positionId,并将该值配置到dml-course-wrapper-config-beans.xml中，作为key
+产品：段落图、首图、头部图
+技能：段落图、首图、头部图
+用户资料：身份证正反面、头像
+例如：
+(1)添加一个段落，并上传一张图片，生成ImageExtend.positionId,并将该值配置到dml-course-wrapper-config-beans.xml中，作为paragraphAdaptor的key
+(2)添加一个技能，并上传一张图片，生成ImageExtend.positionId,并将该值配置到dml-course-wrapper-config-beans.xml中，作为paragProfessionAdaptor的key
+
+6.重启web服务
+7.为用户添加等级数据，待研究。
+8.上线之前把 CoeProductTag.mainId 的 column productId -> mainId
+ ParagProduct.mainId 的 column productId -> mainId
+ ProfessionTag.mainId 的 column professionId -> mainId
+ ParagProfession.mainId 的 column professionId -> mainId
+ 
+
+分享码
+http://m.dramala.com/sz0099/course/index?sharedCode=iGO8G1i7vy
+
+18665859873
+
+9.微信菜单创建
+http://m.dramala.com/social/wechat/createMenu
+
+http://m.dramala.com/sz0099/ood/home/article/index
+
+http://m.dramala.com/sz0099/ood/index?sharedCode=iVbN1RFjW0&refId=256631461674446848&channel=2&channelId=256154466532421632&title=群侠户外-阿清哥
+
+10.
+初始化圈与平台数据
+http://m.dramala.com/quan/initData
+同步用户圈数据
+http://m.dramala.com/quan/syncFromUser
+
+清除邀请二维码
+auth/userqr/manage/clearAllUserQr
+
+http://m.dramala.com/sz0099/ood/index?st=general
+
+http://m.dramala.com/sz0099/ood/home/article/index/recommend?st=general
+http://m.dramala.com/sz0099/ood/home/article/index/recommend?st=general
+
+
+用户登录
+http://m.dramala.com/sys/login?id=999&appId=wxd8a40d6148bd25f4&openid=olVdC0VQI0tPKwFy9JiCGjau6aR8
+http://m.dramala.com/sys/loginUI
+
+前端大神登录链接
+http://m.dramala.com/sys/login?id=999&appId=wxd8a40d6148bd25f4&openid=olVdC0Wip3-jBF0v1G1Okw-rjioE
+
+
+
+
+
+
+
+
+
+退款规则：
+根据活动定价类型不同规则不同，特价活动，常规活动
+1.特价活动退款
+一旦报名，不允许退款
+
+2.常规活动
+以截止报名时间为分界线，
+（1）在截止报名时间前5天申请退款，全额退款
+（2）在截止报名时间前3-5天申请退款，退80%
+（3）在截止报名时间前1-3天申请退款，退70%
+（4）在截止报名时间前24小时内申请退款，退60%
+（5）在截止报名时间后申请退款，不可退款，可安排他人顶替，保险无法顶替，顶替人需自行购买保险
+
+3.无法按期出行的活动退款
+如活动因不可抗力无法按期出行：
+（1）请在活动开始时间提前24小时之内，由活动发起者进行延期操作
+（2）如活动取消，由活动发起者进行申请退款操作，每月有一次机会申请免费全额退款。
+其余情况将收取1%违约金，从活动保证金中扣除。
+每次发起活动均要缴纳活动保证金，等活动结束后退回。
+
+申请退款一经审核通过，款额将于不超过7个工作日原路返回用户帐户中。
+
+平台收费规则：
+1.AA制活动
+（1）10元以内的活动，按报名费价格五五分成，即活动发起者占五成，平台服务费占五成
+（2）10-30元的活动，按报名费价格四六分成，即活动发起者占六成，平台服务费占四成
+（3）30-50元的活动，按报名费价格三七分成，即活动发起者占七成，平台服务费占三成
+（4）50元以上的活动，平台技术服务费按报名费价格的8%收取，其余归活动发起者所有。
+
+2.自助活动
+（1）10元以内的活动，按报名费价格四六分成，即活动发起者占60%，平台服务费占40%
+（2）10-30元的活动，按报名费价格三七分成，即活动发起者占70%，平台服务费占30%
+（3）30-50元的活动，按报名费价格二八分成，即活动发起者占75%，平台服务费占25%
+（4）50元以上的活动，平台技术服务费按报名费价格的5%收取，其余归活动发起者所有。
+
+3.免费活动
+活动发起者与平台均不收取任何费用，用户自主选择参加，如在活动过程中发现有收费行为，可进行举报，情节严重者将作封号处理
+
+
+领队认证与升级
+申请领队条件：
+1.已绑定手机号
+2.已完成身份证认证
+3.已发布3篇文章 或 快捷通道一：1篇文章+29元认证费 快捷通道二：99元认证费
+
+领队升级条件：
+1星升2星：要有队旗，组织3篇活动，快捷通道：队旗+1次活动+29元认证费 快捷通道二：队旗+99元认证费
+2星升3星：要有队旗，组织3篇活动，快捷通道：队旗+1次活动+29元认证费 快捷通道二：队旗+99元认证费
+
+

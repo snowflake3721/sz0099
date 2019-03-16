@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context    
+        http://www.springframework.org/schema/context/spring-context-4.0.xsd
+		http://www.springframework.org/schema/util 
+		http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<!-- <context:property-placeholder ignore-unresolvable="true" location="classpath*:/web/config-spring-shiro.properties;classpath*:/web/config-redis.properties;"/> -->
+	<!-- <bean id="springMvcPropertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:config-spring-shiro.properties</value>
+				<value>classpath:config-spring-shiro-fd.properties</value>
+				<value>classpath:config-redis.properties</value>
+				
+				<value>classpath:config-webapp.properties</value>
+				<value>classpath:config-webfile.properties</value>
+				<value>classpath:config-metaq.properties</value>
+			</list>
+		</property>
+	</bean> -->
+	
+	<!-- <import resource="classpath*:web/config-redis.xml"/> -->
+	
+    <!-- realm -->
+    <!--depends-on="userRepository, userLastOnlineRepository, userStatusHistoryRepository, springUtils" -->
+    <bean id="userRealm" class="org.jit4j.core.shiro.security.realm.UserAuthorizingRealm">
+        <!-- 用切面缓存代理了 此处就不缓存了 -->
+        <property name="authenticationCachingEnabled" value="false"/>
+        <property name="authorizationCachingEnabled" value="false"/>
+        <property name="credentialsMatcher" ref="retryLimitHashedCredentialsMatcher"/>
+        <property name="userAdaptor" ref="userAdaptor"/>
+        <property name="resourceAdaptor" ref="resourceAdaptor"/>
+        <property name="saltFixed" value="jit4jdml"></property>
+    </bean>
+    
+    <bean id="wechatRealm" class="org.jit4j.core.shiro.security.realm.WechatAuthorizingRealm">
+    	<property name="authenticationCachingEnabled" value="false"/>
+        <property name="authorizationCachingEnabled" value="false"/>
+        <property name="credentialsMatcher" ref="retryLimitHashedCredentialsMatcher"/>
+        <property name="userAdaptor" ref="userAdaptor"/>
+        <property name="resourceAdaptor" ref="resourceAdaptor"/>
+        <property name="saltFixed" value="jit4jdml"></property>
+    </bean>
+    
+    <bean id="userAdaptor" class="org.jit4j.core.shiro.security.adaptor.UserAdaptorImpl">
+    <property name="downloadUtil" ref="downloadUtil"></property>
+    </bean>
+    
+    <bean id="downloadUtil" class="org.jit4j.app.client.image.download.DownloadUtil">
+    	<property name="basePath" value="${file.avatar.core.basePath}"></property>
+		<property name="basePathFolder" value="${file.avatar.core.defaultPath.dir}"></property>
+		<property name="accessUrlMapping" value="${file.avatar.core.access.url.mapping}"></property>
+		<property name="accessUrlBasePath" value="${file.avatar.core.access.url.basePath}"></property>
+    </bean>
+    
+    <bean id="resourceAdaptor" class="org.jit4j.core.shiro.security.adaptor.ResourceAdaptorImpl"></bean>
+    
+    <bean id="retryLimitHashedCredentialsMatcher" class="org.jit4j.core.shiro.security.passwd.RetryLimitHashedCredentialsMatcher">
+    	<property name="cacheManager" ref="redisCacheManager"/>
+    	<property name="enable" value="false"/>
+    	<property name="retryMax" value="5"/>
+    	<property name="hashAlgorithmName" value="MD5"/>
+    	<property name="hashSalted" value="false"/>
+    	<property name="storedCredentialsHexEncoded" value="true"/>
+    	<property name="passwordGenerator" ref="passwordGenerator"></property>
+    </bean>
+    
+    <bean id="passwordGenerator" class="org.jit4j.core.shiro.security.passwd.PasswordGenerator">
+    	<property name="algorithmName" value="MD5"></property>
+    	<property name="hashIterations" value="1"></property>
+    	<property name="saltFixed" value="jit4jdml"></property>
+    </bean>
+
+    <!---cookie-->
+    <!-- uid(session id) 生成策略 -->
+    <bean id="sessionIdGenerator" class="org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator"/>
+    <bean id="sessionIdCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+        <constructor-arg value="${shiro.uid.cookie.name}"/>
+        <property name="domain" value="${shiro.uid.cookie.domain}"/>
+        <property name="path" value="${shiro.uid.cookie.path}"/>
+        <property name="httpOnly" value="${shiro.uid.cookie.httpOnly}"/>
+        <property name="maxAge" value="${shiro.uid.cookie.maxAge}"/>
+    </bean>
+    <bean id="rememberMeCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+        <constructor-arg value="${shiro.uid.rememeberMe.cookie.name}"/>
+        <property name="domain" value="${shiro.uid.cookie.domain}"/>
+        <property name="path" value="${shiro.uid.cookie.path}"/>
+        <property name="httpOnly" value="${shiro.uid.cookie.httpOnly}"/>
+        <property name="maxAge" value="${shiro.uid.rememeberMe.cookie.maxAge}"/>
+    </bean>
+
+    <!--dao -->
+    <!-- 会话保持的DAO -->
+    <!-- <bean id="onlineSessionDAO" class="org.apache.shiro.session.mgt.eis.OnlineSessionDAO">
+        <property name="sessionIdGenerator" ref="sessionIdGenerator"/>
+        <property name="activeSessionsCacheName" value="${shiro.active.session.cacheName}"/>
+    </bean>
+
+    <bean id="onlineSessionFactory" class="org.apache.shiro.session.mgt.OnlineSessionFactory"/> -->
+
+    <!-- manager -->
+    <!-- Remembered vs Authenticated http://www.ituring.com.cn/article/287 -->
+    <bean id="rememberMeManager" class="org.apache.shiro.web.mgt.CookieRememberMeManager">
+        <!-- rememberme cookie加密的密钥 建议每个项目都不一样 默认AES算法 密钥长度（128 256 512 位）-->
+        <property name="cipherKey"
+                  value="#{T(org.apache.shiro.codec.Base64).decode('${shiro.uid.rememeberMe.cookie.base64.cipherKey}')}"/>
+        <property name="cookie" ref="rememberMeCookie"/>
+    </bean>
+
+	
+	<!-- 会话管理器 -->
+    <bean id="sessionManager" class="org.jit4j.core.shiro.security.mgt.SimpleWebSessionManager">
+        <property name="globalSessionTimeout" value="${shiro.session.globalSessionTimeout}"></property>
+        <property name="sessionFactory" ref="simpleSessionFactory"/>
+        <property name="sessionDAO" ref="redisShiroSessionDAO"/>
+        <property name="deleteInvalidSessions" value="false"/>
+
+
+        <property name="sessionValidationInterval" value="${shiro.session.globalSessionTimeout}"/>
+        <property name="sessionValidationSchedulerEnabled" value="true"/>
+        <property name="sessionValidationScheduler" ref="sessionValidationScheduler"/>
+
+        <property name="cacheManager" ref="redisCacheManager"/>
+        <property name="sessionIdCookieEnabled" value="true"/>
+        <property name="sessionIdCookie" ref="sessionIdCookie"/>
+    </bean>
+    
+    <bean id="redisCacheManager" class="org.jit4j.core.cache.redis.shiro.RedisCacheManager">
+    	<property name="redisManager" ref="redisManager"/>
+    </bean>
+    
+    <bean id="simpleSessionFactory" class="org.apache.shiro.session.mgt.SimpleSessionFactory"></bean>
+    
+    <bean id="redisShiroSessionDAO" class="org.jit4j.core.cache.redis.shiro.RedisSessionDAO">
+        <property name="redisManager" ref="redisManager"/>
+        <property name="keyPrefix" value="${shiro.session.id.keyPrefix}"/>
+    </bean>
+    
+    <bean id="sessionValidationScheduler" class="org.jit4j.core.shiro.security.mgt.SimpleExecutorServiceSessionValidationScheduler"></bean>
+    
+    <bean id="securityManager" class="org.jit4j.core.shiro.security.mgt.WebDefaultSecurityManager">
+        <!-- Single realm app. If you have multiple realms, use the 'realms' property instead. -->
+        <!-- <property name="realm" ref="userRealm"/> -->
+        <property name="realms">
+        	<list>
+        		<ref bean="userRealm"/>
+        		<ref bean="wechatRealm"/>
+        	</list>
+        </property>
+        <property name="sessionManager" ref="sessionManager"/>
+        <property name="rememberMeManager" ref="rememberMeManager"/>
+    </bean>
+
+
+    <!-- filter -->
+    <!--替换默认的form 验证过滤器-->
+    <bean id="formAuthenticationFilter" class="org.jit4j.core.shiro.security.filter.CustomFormAuthenticationFilter">
+        <property name="defaultSuccessUrl" value="${shiro.default.success.url}"/>
+        <property name="adminDefaultSuccessUrl" value="${shiro.admin.default.success.url}"/>
+        <!--表单上的用户名/密码 下次自动登录的参数名-->
+        <property name="usernameParam" value="username"/>
+        <property name="passwordParam" value="password"/>
+        <property name="rememberMeParam" value="rememberMe"/>
+    </bean>
+
+    <!-- 退出登录过滤器 -->
+    <bean id="logoutFilter" class="org.apache.shiro.web.filter.authc.LogoutFilter">
+        <property name="redirectUrl" value="${shiro.logout.success.url}"/>
+    </bean>
+    <!--提取系统用户（User） 验证用户是否合法的过滤器（如是否删除了 是否锁定了） -->
+    <bean id="sysUserFilter" class="org.jit4j.core.shiro.security.filter.SysUserFilter">
+        <property name="userBlockedUrl" value="${shiro.user.blocked.url}"/>
+        <property name="userNotfoundUrl" value="${shiro.user.notfound.url}"/>
+        <property name="userUnknownErrorUrl" value="${shiro.user.unknown.error.url}"/>
+    </bean>
+
+    <bean id="jCaptchaValidateFilter" class="org.jit4j.core.shiro.security.filter.JCaptchaValidateFilter">
+        <property name="jcaptchaEbabled" value="${shiro.jcaptcha.enable}"/>
+        <property name="jcaptchaParamName" value="jcaptchaCode"/>
+        <property name="jcapatchaErrorUrl" value="${shiro.jcaptcha.error.url}"/>
+        <property name="redisManager" ref="redisManager"/>
+    </bean>
+    <context:component-scan base-package="org.jit4j.core.shiro"/>
+    <bean id="jCaptchaFilter" class="org.jit4j.core.shiro.security.filter.JCaptchaFilter"/>
+    
+    <bean id="anonymousFilter" class="org.apache.shiro.web.filter.authc.AnonymousFilter"/>
+    <bean id="permissionFilter" class="org.apache.shiro.web.filter.authz.HttpMethodPermissionFilter"/>
+    <bean id="rolesFilter" class="org.apache.shiro.web.filter.authz.RolesAuthorizationFilter"/>
+    <bean id="customInitServletFilter" class="org.jit4j.core.shiro.security.filter.CustomInitServletFilter"/>
+    <bean id="loginUserRedirectFilter" class="org.jit4j.core.shiro.security.filter.LoginUserRedirectFilter">
+    	<property name="loginUserRedirectUrl" value="${shiro.default.success.url}"></property>
+    	<property name="jit4jConfigShiro" ref="jit4jConfigShiro"></property>
+    </bean>
+    
+    <bean id="userAccessLogFilter" class="org.jit4j.core.shiro.security.filter.UserAccessLogFilter"></bean>
+
+	<bean id="wechatOauthFilter" class="org.jit4j.core.shiro.security.filter.WechatOauthFilter">
+		<property name="passwordGenerator" ref="passwordGenerator"></property>
+		<property name="userAdaptor" ref="userAdaptor"></property>
+	</bean>
+	
+	<bean id="loginStatusFilter" class="org.jit4j.core.shiro.security.filter.LoginStatusFilter"></bean>
+
+
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <property name="securityManager" ref="securityManager"/>
+        <!-- override these for application-specific URLs if you like:-->
+        <property name="loginUrl" value="${shiro.login.url}"/>
+        <property name="unauthorizedUrl" value="${shiro.unauthorizedUrl}"/>
+        <!-- The 'filters' property is not necessary since any declared javax.servlet.Filter bean -->
+        <!-- defined will be automatically acquired and available via its beanName in chain -->
+        <!-- definitions, but you can perform instance overrides or name aliases here if you like: -->
+        <property name="filters">
+            <util:map>
+                <entry key="authc" value-ref="formAuthenticationFilter"/>
+                <entry key="loginedR" value-ref="loginUserRedirectFilter"/>
+                <entry key="logout" value-ref="logoutFilter"/>
+                <entry key="sysUser" value-ref="sysUserFilter"/>
+                <entry key="jCaptchaValidate" value-ref="jCaptchaValidateFilter"/>
+                <entry key="jCaptcha" value-ref="jCaptchaFilter"/>
+                <entry key="init" value-ref="customInitServletFilter"/>
+                <entry key="anon" value-ref="anonymousFilter"/>
+                <entry key="perms" value-ref="permissionFilter"/>
+                <entry key="roles" value-ref="rolesFilter"/>
+                <entry key="wxOauth" value-ref="wechatOauthFilter"/>
+                <entry key="userAccessLog" value-ref="userAccessLogFilter"/>
+                <entry key="loginStatus" value-ref="loginStatusFilter"/>
+            </util:map>
+        </property>
+        <property name="filterChainDefinitions" value="${shiro.filterChainDefinitions}"/>
+    </bean>
+    
+    <bean id="jit4jConfigShiro" class="org.jit4j.core.shiro.security.filter.config.Jit4jConfigShiro">
+    	<property name="filterChainDefinitions" value="${shiro.redirect}"/>
+    </bean>
+<!-- /login = jCaptchaValidate -->
+
+
+	
+	<bean id="defaultKaptcha" class="com.google.code.kaptcha.impl.DefaultKaptcha">  
+        <property name="config">  
+            <bean class="com.google.code.kaptcha.util.Config">  
+                <constructor-arg>  
+                    <props>  
+                        <!-- 验证码宽度 -->  
+                        <prop key="kaptcha.image.width">200</prop>  
+                        <!-- 验证码高度 -->  
+                        <prop key="kaptcha.image.height">50</prop>  
+                        <!-- 生成验证码内容范围 -->  
+                        <prop key="kaptcha.textproducer.char.string">0123456789ABCDEFGHJKLMNPQRSTUVWXYZ</prop>  
+                        <!-- 验证码个数 -->  
+                        <prop key="kaptcha.textproducer.char.length">4</prop>  
+                        <!-- 是否有边框 -->  
+                        <prop key="kaptcha.border">yes</prop>  
+                        <!-- 边框颜色 -->  
+                        <prop key="kaptcha.border.color">105,179,90</prop>  
+                        <!-- 边框厚度 -->  
+                        <prop key="kaptcha.border.thickness">1</prop>  
+                        <!-- 验证码字体颜色 -->  
+                        <prop key="kaptcha.textproducer.font.color">black</prop>  
+                        <!-- 验证码字体大小 -->  
+                        <prop key="kaptcha.textproducer.font.size">40</prop>  
+                        <!-- 验证码所属字体样式 -->  
+                        <prop key="kaptcha.textproducer.font.names">Arial</prop>  
+                        <!-- 干扰线颜色 -->  
+                        <prop key="kaptcha.noise.color">black</prop>  
+                        <!-- 验证码文本字符间距 -->  
+                        <prop key="kaptcha.textproducer.char.space">6</prop>  
+                        
+                        <!-- <prop key="kaptcha.textproducer.impl">com.google.code.kaptcha.text.impl.FiveLetterFirstNameTextCreator</prop> -->  
+                        
+                        <prop key="kaptcha.textproducer.impl">com.google.code.kaptcha.text.impl.DefaultTextCreator</prop>  
+                        
+                        
+                        <!-- 图片样式 :阴影 --> 
+                        <prop key="kaptcha.obscurificator.impl">com.google.code.kaptcha.impl.ShadowGimpy</prop> 
+                        
+                        <!-- 图片样式 :水纹
+                        <prop key="kaptcha.obscurificator.impl">com.google.code.kaptcha.impl.WaterRipple</prop> 
+                          --> 
+                        
+                        <prop key="kaptcha.noise.impl">com.google.code.kaptcha.impl.DefaultNoise</prop>
+                        <!--
+						 <prop key="kaptcha.noise.impl">com.google.code.kaptcha.impl.NoNoise</prop> 
+                        -->
+                    </props>  
+                </constructor-arg>  
+            </bean>  
+        </property>  
+    </bean> 
+
+    <!-- aop and other-->
+    <!-- For simplest integration, so that all SecurityUtils.* methods work in all cases, -->
+    <!-- make the securityManager bean a static singleton. DO NOT do this in web -->
+    <!-- applications - see the 'Web Applications' section below instead. -->
+    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="staticMethod" value="org.apache.shiro.SecurityUtils.setSecurityManager"/>
+        <property name="arguments" ref="securityManager"/>
+    </bean>
+    
+    <!-- Enable Shiro Annotations for Spring-configured beans.  Only run after -->
+	<!-- the lifecycleBeanProcessor has run: -->
+	<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" depends-on="lifecycleBeanPostProcessor"/>
+	    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+	    <property name="securityManager" ref="securityManager"/>
+	</bean>
+	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+	
+	
+	
+</beans>
